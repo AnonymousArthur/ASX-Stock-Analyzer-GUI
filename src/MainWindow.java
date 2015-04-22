@@ -7,7 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -29,11 +32,14 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
     final static String MODULE1 = "Module1";
     final static String MODULE2 = "Module2";
     final static JLabel L_input_file_name = new JLabel();
-    public static String inpuFilePath;
+	public static String inpuFilePath;
+    private ArrayList<JTextField> arguments;
+    
 	public MainWindow (){
 		this.setTitle("ALGORITHMIC TRADING");
 		this.setSize(800, 700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.arguments = new ArrayList<JTextField>();
         
 		createUI(this.getContentPane());
 	}
@@ -90,7 +96,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    pane.add(cards, BorderLayout.CENTER);
 		}
 	
-	private static JPanel arguments_form() {
+	private JPanel arguments_form() {
 	    String[] labels = {"Window: ", "Threshold: "};
 	    int numPairs = labels.length;
 	
@@ -100,6 +106,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	        JLabel l = new JLabel(labels[i], JLabel.TRAILING);
 	        p.add(l);
 	        JTextField textField = new JTextField(10);
+	        this.arguments.add(textField);
 	        l.setLabelFor(textField);
 	        p.add(textField);
 	    }
@@ -118,12 +125,47 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	//COMPUTE BUTTON PRESS
 	public void actionPerformed(ActionEvent e) {
 	    Toolkit.getDefaultToolkit().beep();
-	    System.out.println("BUTTON PRESSED");
-	    DataFileSettings dfs = new DataFileSettings();
-	    dfs.setDataFile("/home/kioh/git/Momentum-Strategy-Module/SUMMARY.csv");
-	    LiveGraph app = LiveGraph.application();
-	    app.execStandalone(new String[] {"-dfs", "/yourapplication/startup.lgdfs"});
 	    
+	    
+	    //MAKE THIS VARIABLE
+	    String filepath = "/home/kioh/git/GUI/Awesome-MSM-1.2b.jar";
+	    Process proc;
+	    String execCommand = "java -jar " + filepath;
+	    execCommand = execCommand + " " + inpuFilePath;
+	    for (int i = 0; i < arguments.size(); i++){
+	    	execCommand = execCommand + " " + arguments.get(i).getText();
+	    }
+	    System.out.println(execCommand);
+		try {
+			proc = Runtime.getRuntime().exec(execCommand);
+		    proc.waitFor();
+		    InputStream in = proc.getInputStream();
+		    InputStream err = proc.getErrorStream();
+
+		    byte b[]=new byte[in.available()];
+		    in.read(b,0,b.length);
+		    System.out.println(new String(b));
+
+		    byte c[]=new byte[err.available()];
+		    err.read(c,0,c.length);
+		    System.out.println(new String(c));
+		    System.out.println("DONE");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    /*
+	    DataFileSettings dfs = new DataFileSettings();
+	    
+	    dfs.setDataFile("/SUMMARY.csv");
+	    
+	    LiveGraph app = LiveGraph.application();
+	    
+	    app.execStandalone(new String[0]);
+	    */
 	    
 	}
 
