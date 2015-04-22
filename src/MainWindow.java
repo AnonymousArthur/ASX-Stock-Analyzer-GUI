@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -15,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-public class MainWindow extends JFrame implements ItemListener{
+public class MainWindow extends JFrame implements ItemListener, ActionListener{
     /**
 	 * 
 	 */
@@ -33,83 +34,87 @@ public class MainWindow extends JFrame implements ItemListener{
 		createUI(this.getContentPane());
 	}
 	
-public void createUI (Container pane) {
-	//Put the JComboBox in a JPanel to get a nicer look.
-    JPanel comboBoxPane = new JPanel(); //use FlowLayout
-    String comboBoxItems[] = { MODULE1, MODULE2 };
-    
-    JComboBox cb = new JComboBox(comboBoxItems);
-    cb.setEditable(false);
-    cb.addItemListener(this);
-    comboBoxPane.add(cb);
-     
-    //Create the "cards".
-    JPanel card1 = new JPanel();
-    
-    JButton B_Input_Data = new JButton("Input Data");
-    JButton B_Compute = new JButton("Compute");
-    
-    //JLabel L_input_file_name = new JLabel();
-    L_input_file_name.setText("Select file");
-    card1.add(arguments_form());
-    card1.add(B_Input_Data);
-    card1.add(L_input_file_name);
-    card1.add(B_Compute);
-    
-    B_Input_Data.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			try {
-				FileChooser fileChooser = new FileChooser();
-				inpuFilePath = fileChooser.getPath();
-				//System.out.println(inpuFilePath);
-				L_input_file_name.setText(fileChooser.getName()+" loaded");
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}						
-		}		
-	});
-    
-    
-    JPanel card2 = new JPanel();
-    card2.add(arguments_form());
-    card2.add(new JButton("Input Data"));
-    card2.add(new JButton("Compute"));
-     
-    //Create the panel that contains the "cards".
-    cards = new JPanel(new CardLayout());
-    cards.add(card1, MODULE1);
-    cards.add(card2, MODULE2);
-     
-    pane.add(comboBoxPane, BorderLayout.PAGE_START);
-    pane.add(cards, BorderLayout.CENTER);
+	public void createUI (Container pane) {
+		//Put the JComboBox in a JPanel to get a nicer look.
+	    JPanel comboBoxPane = new JPanel(); //use FlowLayout
+	    String comboBoxItems[] = { MODULE1, MODULE2 };
+	    
+	    JComboBox cb = new JComboBox(comboBoxItems);
+	    cb.setEditable(false);
+	    cb.addItemListener(this);
+	    comboBoxPane.add(cb);
+	     
+	    //Create the "cards".
+	    JPanel card1 = new JPanel();
+	    
+	    JButton B_Input_Data = new JButton("Input Data");
+	    JButton B_Compute = new JButton("Compute");
+	    B_Compute.addActionListener(this);
+	    
+	    //JLabel L_input_file_name = new JLabel();
+	    L_input_file_name.setText("Select file");
+	    card1.add(arguments_form());
+	    card1.add(B_Input_Data);
+	    card1.add(L_input_file_name);
+	    card1.add(B_Compute);
+	    
+	    B_Input_Data.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					FileChooser fileChooser = new FileChooser();
+					inpuFilePath = fileChooser.getPath();
+					//System.out.println(inpuFilePath);
+					L_input_file_name.setText(fileChooser.getName()+" loaded");
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}						
+			}		
+		});
+	    
+	    
+	    JPanel card2 = new JPanel();
+	    card2.add(arguments_form());
+	    card2.add(new JButton("Input Data"));
+	    card2.add(new JButton("Compute"));
+	     
+	    //Create the panel that contains the "cards".
+	    cards = new JPanel(new CardLayout());
+	    cards.add(card1, MODULE1);
+	    cards.add(card2, MODULE2);
+	     
+	    pane.add(comboBoxPane, BorderLayout.PAGE_START);
+	    pane.add(cards, BorderLayout.CENTER);
+		}
+	
+	private static JPanel arguments_form() {
+	    String[] labels = {"Window: ", "Threshold: "};
+	    int numPairs = labels.length;
+	
+	    //Create and populate the panel.
+	    JPanel p = new JPanel(new SpringLayout());
+	    for (int i = 0; i < numPairs; i++) {
+	        JLabel l = new JLabel(labels[i], JLabel.TRAILING);
+	        p.add(l);
+	        JTextField textField = new JTextField(10);
+	        l.setLabelFor(textField);
+	        p.add(textField);
+	    }
+	    //Lay out the panel.
+	    SpringUtilities.makeCompactGrid(p,
+	                                    numPairs, 2, //rows, cols
+	                                    6, 6,        //initX, initY
+	                                    6, 6);       //xPad, yPad
+	    return p;
+	}
+	
+	public void itemStateChanged(ItemEvent evt) {
+		CardLayout cl = (CardLayout)(cards.getLayout());
+	    cl.show(cards, (String)evt.getItem()); 
+	}
+	public void actionPerformed(ActionEvent e) {
+	    Toolkit.getDefaultToolkit().beep();
+	    System.out.println("BUTTON PRESSED");
 	}
 
-private static JPanel arguments_form() {
-    String[] labels = {"Window: ", "Threshold: "};
-    int numPairs = labels.length;
-
-    //Create and populate the panel.
-    JPanel p = new JPanel(new SpringLayout());
-    for (int i = 0; i < numPairs; i++) {
-        JLabel l = new JLabel(labels[i], JLabel.TRAILING);
-        p.add(l);
-        JTextField textField = new JTextField(10);
-        l.setLabelFor(textField);
-        p.add(textField);
-    }
-    //Lay out the panel.
-    SpringUtilities.makeCompactGrid(p,
-                                    numPairs, 2, //rows, cols
-                                    6, 6,        //initX, initY
-                                    6, 6);       //xPad, yPad
-    return p;
 }
 
-@Override
-public void itemStateChanged(ItemEvent evt) {
-	CardLayout cl = (CardLayout)(cards.getLayout());
-    cl.show(cards, (String)evt.getItem()); 
-}
-
-	
-}
