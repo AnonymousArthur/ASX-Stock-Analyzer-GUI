@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,13 +21,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-
+import jdk.internal.dynalink.beans.StaticClass;
 
 public class MainWindow extends JFrame implements ItemListener{
-    private static JPanel cards;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static JPanel cards;
     final static String MODULE1 = "Module1";
     final static String MODULE2 = "Module2";
-    
+    final static JLabel L_input_file_name = new JLabel();
+    public static String inpuFilePath;
 	public MainWindow (){
 		this.setTitle("ALGORITHMIC TRADING");
 		this.setSize(800, 700);
@@ -51,12 +57,29 @@ public void createUI (Container pane) {
     JButton B_Input_Data = new JButton("Input Data");
     JButton B_Compute = new JButton("Compute");
     
-    
+    //JLabel L_input_file_name = new JLabel();
+    L_input_file_name.setText("FILE_NAME");
     card1.add(arguments_form());
     card1.add(B_Input_Data);
+    card1.add(L_input_file_name);
     card1.add(B_Compute);
     
+    B_Input_Data.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			try {
+				FileChooser fileChooser = new FileChooser();
+				inpuFilePath = fileChooser.getPath();
+				System.out.println(inpuFilePath);
+				L_input_file_name.setText(fileChooser.getName());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}						
+		}		
+	});
+    
+    
     JPanel card2 = new JPanel();
+    card2.add(arguments_form());
     card2.add(new JButton("Input Data"));
     card2.add(new JButton("Compute"));
      
