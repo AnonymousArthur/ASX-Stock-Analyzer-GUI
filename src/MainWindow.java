@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Toolkit;
@@ -121,7 +122,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    DataFileSettings dfs = new DataFileSettings();
 	    dfs.setDataFile("/home/kioh/git/Momentum-Strategy-Module/SUMMARY.csv");
 	    LiveGraph app = LiveGraph.application();
-	    app.exec(new String[0]);
+	    app.execStandalone(new String[] {"-dfs", "/yourapplication/startup.lgdfs"});
 	    
 	    
 	}
