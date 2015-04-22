@@ -1,12 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -20,8 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
-
-import jdk.internal.dynalink.beans.StaticClass;
 
 public class MainWindow extends JFrame implements ItemListener{
     /**
@@ -58,7 +50,7 @@ public void createUI (Container pane) {
     JButton B_Compute = new JButton("Compute");
     
     //JLabel L_input_file_name = new JLabel();
-    L_input_file_name.setText("FILE_NAME");
+    L_input_file_name.setText("Select file");
     card1.add(arguments_form());
     card1.add(B_Input_Data);
     card1.add(L_input_file_name);
@@ -69,8 +61,8 @@ public void createUI (Container pane) {
 			try {
 				FileChooser fileChooser = new FileChooser();
 				inpuFilePath = fileChooser.getPath();
-				System.out.println(inpuFilePath);
-				L_input_file_name.setText(fileChooser.getName());
+				//System.out.println(inpuFilePath);
+				L_input_file_name.setText(fileChooser.getName()+" loaded");
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}						
