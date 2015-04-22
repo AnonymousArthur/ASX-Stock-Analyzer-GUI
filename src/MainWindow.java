@@ -16,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
+import org.LiveGraph.LiveGraph;
+import org.LiveGraph.settings.DataFileSettings;
+
 public class MainWindow extends JFrame implements ItemListener, ActionListener{
     /**
 	 * 
@@ -111,9 +114,16 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 		CardLayout cl = (CardLayout)(cards.getLayout());
 	    cl.show(cards, (String)evt.getItem()); 
 	}
+	//COMPUTE BUTTON PRESS
 	public void actionPerformed(ActionEvent e) {
 	    Toolkit.getDefaultToolkit().beep();
 	    System.out.println("BUTTON PRESSED");
+	    DataFileSettings dfs = new DataFileSettings();
+	    dfs.setDataFile("/home/kioh/git/Momentum-Strategy-Module/SUMMARY.csv");
+	    LiveGraph app = LiveGraph.application();
+	    app.exec(new String[0]);
+	    
+	    
 	}
 
 }
