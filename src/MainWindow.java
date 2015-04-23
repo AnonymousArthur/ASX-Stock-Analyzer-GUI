@@ -151,7 +151,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 			new FileWriter("parameters.txt", true)))) {
 			out.println("window = " + window);
 			out.println("threshold = " + threshold);
-			out.println("output = summary.cvs");
+			out.println("output = summary.csv");
 		} catch (IOException e1) {
 		}
 	    //System.out.println(execCommand);
