@@ -7,9 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -129,16 +132,25 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    
 	    
 	    //MAKE THIS VARIABLE
-	    String filepath = "src/Awesome-MSM-1.2b.jar";
+	    String filepath = "Awesome-MSM-1.2b.jar";
 	    Process proc;
 	    String execCommand = "java -jar " + filepath;
-	    execCommand = execCommand + " " + inpuFilePath;
-	    /*
-	    for (int i = 0; i < arguments.size(); i++){
-	    	execCommand = execCommand + " " + arguments.get(i).getText();
-	    }*/
-	    execCommand = execCommand + " " + arguments.get(0).getText();
-	    execCommand = execCommand + " " + arguments.get(1).getText();
+	    execCommand = execCommand + " " + inpuFilePath + " parameters.txt";
+	    int window = 3;
+	    double threshold = 0.001;
+	    if (!arguments.get(0).getText().isEmpty()){
+	    	window = Integer.parseInt(arguments.get(0).getText());
+	    }
+	    if (!arguments.get(1).getText().isEmpty()){
+	    	threshold = Integer.parseInt(arguments.get(1).getText());
+	    }
+	    try (PrintWriter out = new PrintWriter(new BufferedWriter(
+			new FileWriter("parameters.txt", true)))) {
+			out.println("window = " + window);
+			out.println("threshold = " + threshold);
+			out.println("output = summary.cvs");
+		} catch (IOException e1) {
+		}
 	    System.out.println(execCommand);
 		try {
 			proc = Runtime.getRuntime().exec(execCommand);
