@@ -145,7 +145,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    }
 	    //Add threshold, default value is 0.001 if empty
 	    if (!arguments.get(1).getText().isEmpty()){
-	    	threshold = Integer.parseInt(arguments.get(1).getText());
+	    	threshold = Double.parseDouble(arguments.get(1).getText());
 	    }
 	    try (PrintWriter out = new PrintWriter(new BufferedWriter(
 			new FileWriter("parameters.txt", true)))) {
@@ -154,7 +154,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 			out.println("output = summary.cvs");
 		} catch (IOException e1) {
 		}
-	    System.out.println(execCommand);
+	    //System.out.println(execCommand);
 	    //Run module
 		try {
 			proc = Runtime.getRuntime().exec(execCommand);
@@ -164,12 +164,12 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 
 		    byte b[]=new byte[in.available()];
 		    in.read(b,0,b.length);
-		    System.out.println(new String(b));
+		    //System.out.println(new String(b));
 
 		    byte c[]=new byte[err.available()];
 		    err.read(c,0,c.length);
-		    System.out.println(new String(c));
-		    System.out.println("DONE");
+		    //System.out.println(new String(c));
+		    //System.out.println("DONE");
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} catch (InterruptedException e1) {

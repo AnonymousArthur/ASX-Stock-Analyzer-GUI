@@ -57,7 +57,7 @@ public Chart( String applicationTitle , String chartTitle, String inputFile )
 					//Adds data
 					//Value, category, x-value
 					dataset.addValue(Double.parseDouble(trade[PRICE]) , trade[COMPANY] , trade[DATE] );    
-					System.out.println(trade[8]);
+					//System.out.println(trade[8]);
 					i++;
 				}
 			}
