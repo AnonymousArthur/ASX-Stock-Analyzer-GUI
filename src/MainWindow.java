@@ -22,6 +22,7 @@ import javax.swing.SpringLayout;
 
 import org.LiveGraph.LiveGraph;
 import org.LiveGraph.settings.DataFileSettings;
+import org.jfree.ui.RefineryUtilities;
 
 public class MainWindow extends JFrame implements ItemListener, ActionListener{
     /**
@@ -135,6 +136,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    for (int i = 0; i < arguments.size(); i++){
 	    	execCommand = execCommand + " " + arguments.get(i).getText();
 	    }
+	    execCommand = execCommand + " summary.csv";
 	    System.out.println(execCommand);
 		try {
 			proc = Runtime.getRuntime().exec(execCommand);
@@ -157,6 +159,16 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		//create graph
+		 Chart chart = new Chart(
+			      "Returns" ,
+			      "Returns over Time");
+
+		 chart.pack( );
+		 RefineryUtilities.centerFrameOnScreen( chart );
+		 chart.setVisible( true );
+		
+		
 	    /*
 	    DataFileSettings dfs = new DataFileSettings();
 	    
