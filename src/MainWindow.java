@@ -129,7 +129,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    
 	    
 	    //MAKE THIS VARIABLE
-	    String filepath = "/home/kioh/git/GUI/Awesome-MSM-1.2b.jar";
+	    String filepath = "src/Awesome-MSM-1.2b.jar";
 	    Process proc;
 	    String execCommand = "java -jar " + filepath;
 	    execCommand = execCommand + " " + inpuFilePath;
