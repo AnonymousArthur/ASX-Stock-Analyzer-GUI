@@ -133,10 +133,12 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    Process proc;
 	    String execCommand = "java -jar " + filepath;
 	    execCommand = execCommand + " " + inpuFilePath;
+	    /*
 	    for (int i = 0; i < arguments.size(); i++){
 	    	execCommand = execCommand + " " + arguments.get(i).getText();
-	    }
-	    execCommand = execCommand + " summary.csv";
+	    }*/
+	    execCommand = execCommand + " " + arguments.get(0).getText();
+	    execCommand = execCommand + " " + arguments.get(1).getText();
 	    System.out.println(execCommand);
 		try {
 			proc = Runtime.getRuntime().exec(execCommand);
@@ -161,8 +163,9 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 		}
 		//create graph
 		 Chart chart = new Chart(
-			      "Returns" ,
-			      "Returns over Time");
+			      "Price" ,
+			      "Price over Time",
+			      inpuFilePath);
 
 		 chart.pack( );
 		 RefineryUtilities.centerFrameOnScreen( chart );
