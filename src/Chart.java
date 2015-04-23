@@ -25,10 +25,11 @@ public class Chart extends ApplicationFrame
 public Chart( String applicationTitle , String chartTitle, String inputFile )
    {
       super(applicationTitle);
+      //Set input file
       this.inputFile = inputFile;
       JFreeChart lineChart = ChartFactory.createLineChart(
          chartTitle,
-         "Years","Number of Schools",
+         "Years","Price",
          createDataset(),
          PlotOrientation.VERTICAL,
          true,true,false);
@@ -53,6 +54,8 @@ public Chart( String applicationTitle , String chartTitle, String inputFile )
 				String[] trade = line.split(cvsSplitBy);
 				//
 				if(!trade[0].equals("#RIC") && !trade[8].isEmpty()){
+					//Adds data
+					//Value, category, x-value
 					dataset.addValue(Double.parseDouble(trade[PRICE]) , trade[COMPANY] , trade[DATE] );    
 					System.out.println(trade[8]);
 					i++;
@@ -78,16 +81,4 @@ public Chart( String applicationTitle , String chartTitle, String inputFile )
 		}
       return dataset;
    }
-   /*
-   public static void main( String[ ] args ) 
-   {
-	   LineChart_AWT chart = new LineChart_AWT(
-      "School Vs Years" ,
-      "Numer of Schools vs years");
-
-      chart.pack( );
-      RefineryUtilities.centerFrameOnScreen( chart );
-      chart.setVisible( true );
-   }
-   */
 }
