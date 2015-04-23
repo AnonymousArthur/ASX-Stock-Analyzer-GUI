@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,8 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import org.LiveGraph.LiveGraph;
-import org.LiveGraph.settings.DataFileSettings;
 import org.jfree.ui.RefineryUtilities;
 
 public class MainWindow extends JFrame implements ItemListener, ActionListener{
@@ -132,15 +129,21 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    
 	    
 	    //MAKE THIS VARIABLE
+	    //Build string to run the jar
 	    String filepath = "Awesome-MSM-1.2b.jar";
 	    Process proc;
+	    //Add input file parameter
 	    String execCommand = "java -jar " + filepath;
+	    //Add filename of parameters file
 	    execCommand = execCommand + " " + inpuFilePath + " parameters.txt";
+	    //Create parameters.txt file
 	    int window = 3;
 	    double threshold = 0.001;
+	    //Add window, default value is 3 if empty
 	    if (!arguments.get(0).getText().isEmpty()){
 	    	window = Integer.parseInt(arguments.get(0).getText());
 	    }
+	    //Add threshold, default value is 0.001 if empty
 	    if (!arguments.get(1).getText().isEmpty()){
 	    	threshold = Integer.parseInt(arguments.get(1).getText());
 	    }
@@ -152,6 +155,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 		} catch (IOException e1) {
 		}
 	    System.out.println(execCommand);
+	    //Run module
 		try {
 			proc = Runtime.getRuntime().exec(execCommand);
 		    proc.waitFor();
@@ -167,10 +171,8 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 		    System.out.println(new String(c));
 		    System.out.println("DONE");
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		//create graph
@@ -182,19 +184,6 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 		 chart.pack( );
 		 RefineryUtilities.centerFrameOnScreen( chart );
 		 chart.setVisible( true );
-		
-		
-	    /*
-	    DataFileSettings dfs = new DataFileSettings();
-	    
-	    dfs.setDataFile("/SUMMARY.csv");
-	    
-	    LiveGraph app = LiveGraph.application();
-	    
-	    app.execStandalone(new String[0]);
-	    */
-	    
 	}
-
 }
 
