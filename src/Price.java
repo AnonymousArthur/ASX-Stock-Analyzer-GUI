@@ -11,7 +11,7 @@ import org.jfree.ui.RefineryUtilities;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-public class Chart extends ApplicationFrame
+public class Price extends ApplicationFrame
 {
    /**
 	 * 
@@ -22,7 +22,7 @@ public class Chart extends ApplicationFrame
 	private static final int PRICE = 8;
 	
 	private String inputFile;
-public Chart( String applicationTitle , String chartTitle, String inputFile )
+public Price( String applicationTitle , String chartTitle, String inputFile )
    {
       super(applicationTitle);
       //Set input file

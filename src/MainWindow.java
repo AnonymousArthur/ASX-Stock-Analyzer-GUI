@@ -180,7 +180,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 			e1.printStackTrace();
 		}
 		//create graph
-		 Chart chart = new Chart(
+		 Price chart = new Price(
 			      "Price" ,
 			      "Price over Time",
 			      inpuFilePath);
