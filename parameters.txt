@@ -1,3 +1,0 @@
-window = 3
-threshold = 0.001
-output = summary.csv
