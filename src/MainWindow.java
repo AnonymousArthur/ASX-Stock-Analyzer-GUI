@@ -109,7 +109,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    
 	    //MAKE THIS VARIABLE
 	    //Build string to run the jar
-	    String filepath = "Awesome-MSM-1.5.jar";
+	    String filepath = "Awesome-MSM-1.6.jar";
 	    Process proc;
 	    //Add input file parameter
 	    String execCommand = "java -jar " + filepath;

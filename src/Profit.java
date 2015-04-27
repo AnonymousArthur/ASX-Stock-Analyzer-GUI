@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartFactory;
@@ -47,7 +48,7 @@ public Profit( String applicationTitle , String chartTitle, String inputFile )
       BufferedReader br = null;
 	   String line = "";
 	   String cvsSplitBy = ",";
-	   Double profit = 0.0;
+	   HashMap<String, Double> profits = new HashMap<String, Double>();
 	   try {
 			br = new BufferedReader(new FileReader(inputFile));
 			int i = 0;
@@ -55,18 +56,22 @@ public Profit( String applicationTitle , String chartTitle, String inputFile )
 				// use comma as separator
 				String[] trade = line.split(cvsSplitBy);
 				//
+				if(!profits.containsKey(trade[COMPANY])){
+					profits.put(trade[COMPANY], 0.0);
+				}
 				if(!trade[0].equals("#RIC") && !trade[VALUE].isEmpty()){ 
+					double value = 0;
 					if(trade[SIGNAL].equals("S")){
-						profit += Double.parseDouble(trade[VALUE]);
+						value = profits.get(trade[COMPANY]) + Double.parseDouble(trade[VALUE]);
 					} else if (trade[SIGNAL].equals("B")){
-						profit += Double.parseDouble(trade[VALUE]);
+						value = profits.get(trade[COMPANY]) - Double.parseDouble(trade[VALUE]);
 					}
-					dataset.addValue(profit , trade[COMPANY] , trade[DATE] );    
+					profits.replace(trade[COMPANY], value);
+					dataset.addValue(profits.get(trade[COMPANY]) , trade[COMPANY] , trade[DATE] );    
 					//System.out.println(trade[8]);
 					i++;
 				}
 			}
-			System.out.println(profit);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
