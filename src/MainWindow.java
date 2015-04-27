@@ -161,6 +161,8 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    //System.out.println(execCommand);
 	    //Run module
 		try {
+
+			System.out.println("FSDFDSFds");
 			proc = Runtime.getRuntime().exec(execCommand);
 		    proc.waitFor();
 		    InputStream in = proc.getInputStream();
@@ -174,20 +176,38 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 		    err.read(c,0,c.length);
 		    //System.out.println(new String(c));
 		    //System.out.println("DONE");
+		    //create graph
+			Price chart = new Price(
+				      "Price" ,
+				      "Price over Time",
+				      inpuFilePath);
+
+			 chart.pack( );
+			 RefineryUtilities.centerFrameOnScreen( chart );
+			 chart.setVisible( true );
+			 Profit profit = new Profit(
+					      "Proft" ,
+					      "Pofit over Time",
+					      "summary.csv");
+			 profit.pack( );
+			 RefineryUtilities.centerFrameOnScreen( profit );
+			 profit.setVisible( true );
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
 		//create graph
-		 Price chart = new Price(
+		/*Price chart = new Price(
 			      "Price" ,
 			      "Price over Time",
 			      inpuFilePath);
 
 		 chart.pack( );
 		 RefineryUtilities.centerFrameOnScreen( chart );
-		 chart.setVisible( true );
+		 chart.setVisible( true );*/
+
+		 
 	}
 }
 
