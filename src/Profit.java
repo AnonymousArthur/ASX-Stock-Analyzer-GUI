@@ -58,7 +58,7 @@ public Profit( String applicationTitle , String chartTitle, String inputFile )
 				if(!trade[0].equals("#RIC") && !trade[VALUE].isEmpty()){ 
 					if(trade[SIGNAL].equals("S")){
 						profit += Double.parseDouble(trade[VALUE]);
-					} else if (trade[SIGNAL].equals("b")){
+					} else if (trade[SIGNAL].equals("B")){
 						profit += Double.parseDouble(trade[VALUE]);
 					}
 					dataset.addValue(profit , trade[COMPANY] , trade[DATE] );    

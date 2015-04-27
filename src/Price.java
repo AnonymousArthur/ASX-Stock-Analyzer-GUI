@@ -22,8 +22,7 @@ public class Price extends ApplicationFrame
 	private static final int PRICE = 8;
 	
 	private String inputFile;
-public Price( String applicationTitle , String chartTitle, String inputFile )
-   {
+	public Price( String applicationTitle , String chartTitle, String inputFile ){
       super(applicationTitle);
       //Set input file
       this.inputFile = inputFile;
