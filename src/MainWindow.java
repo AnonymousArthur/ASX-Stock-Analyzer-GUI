@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Toolkit;
@@ -8,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -147,6 +147,10 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    if (!arguments.get(1).getText().isEmpty()){
 	    	threshold = Double.parseDouble(arguments.get(1).getText());
 	    }
+	    File fileTemp = new File("parameters.txt");    
+	    if (fileTemp.exists()) {
+			fileTemp.delete();
+		} 
 	    try (PrintWriter out = new PrintWriter(new BufferedWriter(
 			new FileWriter("parameters.txt", true)))) {
 			out.println("window = " + window);
