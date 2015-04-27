@@ -78,3 +78,13 @@ Start Date/Time: Sun Jan 02 00:00:00 AEDT 2000
 End Date/Time: Mon Mar 23 00:00:00 AEDT 2015
 Elapsed Time: 15Year(s)2Month(s)24Day(s)
 Output File: summary.csv
+=======================
+Developer: Team Awesome
+Momentum Strategy Module Version 1.3
+Input File: /Users/Arthur/Documents/Eclipse_workspace/GUI/ANZ.csv 
+Parameters: /Users/Arthur/Documents/Eclipse_workspace/GUI/ANZ.csv 3 0.010000 summary.csv
+Execution = Successful
+Start Date/Time: Sun Jan 02 00:00:00 AEDT 2000
+End Date/Time: Mon Mar 23 00:00:00 AEDT 2015
+Elapsed Time: 15Year(s)2Month(s)24Day(s)
+Output File: summary.csv

@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 //CSV Parser for Momentum Strategy Module
 //UNSW CSE SENG3011 Team Awesome Copyright Reserved
@@ -71,6 +72,38 @@ public class CSVParser {
 			}
 		}
 		return tradeRecs;		
+	}
+
+	public static LinkedHashMap<String, ArrayList<Trade>> SummaryParse(String inputFile) {
+		ArrayList<Trade> BS = null;
+		LinkedHashMap<String, ArrayList<Trade>> bsHashMap = new LinkedHashMap<String, ArrayList<Trade>>();
+		BufferedReader br = null;
+		String line = "";
+		String cvsSplitBy = ",";
+		try {
+			br = new BufferedReader(new FileReader(inputFile));			
+			while ((line = br.readLine()) != null) {	 
+			    // use comma as separator
+				String[] trade = line.split(cvsSplitBy);
+				if(!trade[0].equals("#RIC")){
+					if(bsHashMap.containsKey(trade[0])){
+						Trade newTrade = new Trade(trade[1], Double.parseDouble(trade[2]), trade[5].charAt(0));
+						BS.add(newTrade);
+					}else {
+						BS = new ArrayList<Trade>();
+						Trade newTrade = new Trade(trade[1], Double.parseDouble(trade[2]), trade[5].charAt(0));
+						BS.add(newTrade);
+						bsHashMap.put(trade[0], BS);
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return bsHashMap;
 	}
 	
 	

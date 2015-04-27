@@ -2,6 +2,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartFactory;
@@ -22,6 +26,19 @@ public class Return extends ApplicationFrame {
 	private static final long serialVersionUID = 1L;
 	public Return(String applicationTitle, String chartTitle, String inputFile) {
 		super(applicationTitle);
+		LinkedHashMap<String, ArrayList<Trade>> BSData = CSVParser.SummaryParse(inputFile);	
+		for (Entry<String, ArrayList<Trade>> entry : BSData.entrySet()) {
+		    String key = entry.getKey();
+		    ArrayList<Trade> value = entry.getValue();
+		    for (Iterator iterator = value.iterator(); iterator.hasNext();) {
+				Trade trade = (Trade) iterator.next();
+				System.out.println(key+trade.date+trade.price+trade.signal);
+			}
+		}
+		/////////Arthur: Code up here is iteration of the summary data set. 
+		
+		
+		
 		JFreeChart lineChart = ChartFactory.createLineChart(chartTitle,
 				"Years", "Price", createDataset(), PlotOrientation.VERTICAL,
 				true, true, false);
@@ -40,7 +57,6 @@ public class Return extends ApplicationFrame {
 
 		   try {
 				br = new BufferedReader(new FileReader(inputFile));
-				int i = 0;
 				while ((line = br.readLine()) != null ) {
 					// use comma as separator
 					String[] trade = line.split(cvsSplitBy);
@@ -50,7 +66,6 @@ public class Return extends ApplicationFrame {
 						//Value, category, x-value
 						dataset.addValue(Double.parseDouble(trade[PRICE]) , trade[COMPANY] , trade[DATE] );    
 						//System.out.println(trade[8]);
-						i++;
 					}
 				}
 			} catch (FileNotFoundException e) {

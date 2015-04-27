@@ -139,7 +139,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    //Run module
 		try {
 
-			System.out.println("FSDFDSFds");
+			//System.out.println("FSDFDSFds");
 			proc = Runtime.getRuntime().exec(execCommand);
 		    proc.waitFor();
 		    InputStream in = proc.getInputStream();
@@ -169,6 +169,12 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 			 profit.pack( );
 			 RefineryUtilities.centerFrameOnScreen( profit );
 			 profit.setVisible( true );
+			 
+			 Return return1 = new Return("Return", "Return over Time", "summary.csv");
+			 return1.pack();
+			 RefineryUtilities.centerFrameOnScreen(return1);
+			 return1.setVisible(true);
+			 
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} catch (InterruptedException e1) {
