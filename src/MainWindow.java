@@ -34,13 +34,12 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
     final static String MODULE2 = "Module2";
     final static JLabel L_input_file_name = new JLabel();
 	public static String inpuFilePath;
-    private ArrayList<JTextField> arguments;
+	private Arguments_form arguments_form_module1;
     
 	public MainWindow (){
 		this.setTitle("ALGORITHMIC TRADING");
 		this.setSize(800, 700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.arguments = new ArrayList<JTextField>();
         
 		createUI(this.getContentPane());
 	}
@@ -64,7 +63,8 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    
 	    //JLabel L_input_file_name = new JLabel();
 	    L_input_file_name.setText("Select file");
-	    card1.add(arguments_form());
+	    arguments_form_module1 = new Arguments_form();
+	    card1.add(arguments_form_module1.get_Panel());
 	    card1.add(B_Input_Data);
 	    card1.add(L_input_file_name);
 	    card1.add(B_Compute);
@@ -84,7 +84,6 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    
 	    
 	    JPanel card2 = new JPanel();
-	    card2.add(arguments_form());
 	    card2.add(new JButton("Input Data"));
 	    card2.add(new JButton("Compute"));
 	     
@@ -97,27 +96,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    pane.add(cards, BorderLayout.CENTER);
 		}
 	
-	private JPanel arguments_form() {
-	    String[] labels = {"Window: ", "Threshold: "};
-	    int numPairs = labels.length;
-	
-	    //Create and populate the panel.
-	    JPanel p = new JPanel(new SpringLayout());
-	    for (int i = 0; i < numPairs; i++) {
-	        JLabel l = new JLabel(labels[i], JLabel.TRAILING);
-	        p.add(l);
-	        JTextField textField = new JTextField(10);
-	        this.arguments.add(textField);
-	        l.setLabelFor(textField);
-	        p.add(textField);
-	    }
-	    //Lay out the panel.
-	    SpringUtilities.makeCompactGrid(p,
-	                                    numPairs, 2, //rows, cols
-	                                    6, 6,        //initX, initY
-	                                    6, 6);       //xPad, yPad
-	    return p;
-	}
+
 	
 	public void itemStateChanged(ItemEvent evt) {
 		CardLayout cl = (CardLayout)(cards.getLayout());
@@ -140,13 +119,11 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    int window = 3;
 	    double threshold = 0.001;
 	    //Add window, default value is 3 if empty
-	    if (!arguments.get(0).getText().isEmpty()){
-	    	window = Integer.parseInt(arguments.get(0).getText());
-	    }
+	    window = arguments_form_module1.getWindow();
 	    //Add threshold, default value is 0.001 if empty
-	    if (!arguments.get(1).getText().isEmpty()){
-	    	threshold = Double.parseDouble(arguments.get(1).getText());
-	    }
+	    threshold = arguments_form_module1.getThreshold();
+	    
+	    
 	    File fileTemp = new File("parameters.txt");
 		if (fileTemp.exists()) {
 			fileTemp.delete();

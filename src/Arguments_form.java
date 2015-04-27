@@ -6,8 +6,8 @@ import javax.swing.SpringLayout;
 
 public class Arguments_form {
 	JPanel p;
-	private int window;
-	private double threshold;
+	private int window = 3;
+	private double threshold = 0.001;
 	private JTextField window_field = new JTextField(10);
 	private JTextField threshold_field = new JTextField(10);
 	
@@ -38,9 +38,11 @@ public class Arguments_form {
 		return p;
 	}
 	public int getWindow(){
-		return Integer.parseInt(window_field.getText());
+		window = Integer.parseInt(window_field.getText());
+		return window;
 	}
 	public double getThreshold(){
-		return Double.parseDouble(threshold_field.getText());
+		threshold = Double.parseDouble(threshold_field.getText());
+		return threshold;
 	}
 }
