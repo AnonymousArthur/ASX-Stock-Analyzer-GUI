@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Toolkit;
@@ -6,7 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
+
+import org.jfree.ui.RefineryUtilities;
 
 public class MainWindow extends JFrame implements ItemListener, ActionListener{
     /**
@@ -25,11 +33,14 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
     final static String MODULE1 = "Module1";
     final static String MODULE2 = "Module2";
     final static JLabel L_input_file_name = new JLabel();
-    public static String inpuFilePath;
+	public static String inpuFilePath;
+    private ArrayList<JTextField> arguments;
+    
 	public MainWindow (){
 		this.setTitle("ALGORITHMIC TRADING");
 		this.setSize(800, 700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.arguments = new ArrayList<JTextField>();
         
 		createUI(this.getContentPane());
 	}
@@ -86,7 +97,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	    pane.add(cards, BorderLayout.CENTER);
 		}
 	
-	private static JPanel arguments_form() {
+	private JPanel arguments_form() {
 	    String[] labels = {"Window: ", "Threshold: "};
 	    int numPairs = labels.length;
 	
@@ -96,6 +107,7 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 	        JLabel l = new JLabel(labels[i], JLabel.TRAILING);
 	        p.add(l);
 	        JTextField textField = new JTextField(10);
+	        this.arguments.add(textField);
 	        l.setLabelFor(textField);
 	        p.add(textField);
 	    }
@@ -111,10 +123,67 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 		CardLayout cl = (CardLayout)(cards.getLayout());
 	    cl.show(cards, (String)evt.getItem()); 
 	}
+	//COMPUTE BUTTON PRESS
 	public void actionPerformed(ActionEvent e) {
 	    Toolkit.getDefaultToolkit().beep();
-	    System.out.println("BUTTON PRESSED");
-	}
+	    
+	    
+	    //MAKE THIS VARIABLE
+	    //Build string to run the jar
+	    String filepath = "Awesome-MSM-1.2b.jar";
+	    Process proc;
+	    //Add input file parameter
+	    String execCommand = "java -jar " + filepath;
+	    //Add filename of parameters file
+	    execCommand = execCommand + " " + inpuFilePath + " parameters.txt";
+	    //Create parameters.txt file
+	    int window = 3;
+	    double threshold = 0.001;
+	    //Add window, default value is 3 if empty
+	    if (!arguments.get(0).getText().isEmpty()){
+	    	window = Integer.parseInt(arguments.get(0).getText());
+	    }
+	    //Add threshold, default value is 0.001 if empty
+	    if (!arguments.get(1).getText().isEmpty()){
+	    	threshold = Double.parseDouble(arguments.get(1).getText());
+	    }
+	    try (PrintWriter out = new PrintWriter(new BufferedWriter(
+			new FileWriter("parameters.txt", true)))) {
+			out.println("window = " + window);
+			out.println("threshold = " + threshold);
+			out.println("output = summary.csv");
+		} catch (IOException e1) {
+		}
+	    //System.out.println(execCommand);
+	    //Run module
+		try {
+			proc = Runtime.getRuntime().exec(execCommand);
+		    proc.waitFor();
+		    InputStream in = proc.getInputStream();
+		    InputStream err = proc.getErrorStream();
 
+		    byte b[]=new byte[in.available()];
+		    in.read(b,0,b.length);
+		    //System.out.println(new String(b));
+
+		    byte c[]=new byte[err.available()];
+		    err.read(c,0,c.length);
+		    //System.out.println(new String(c));
+		    //System.out.println("DONE");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		//create graph
+		 Chart chart = new Chart(
+			      "Price" ,
+			      "Price over Time",
+			      inpuFilePath);
+
+		 chart.pack( );
+		 RefineryUtilities.centerFrameOnScreen( chart );
+		 chart.setVisible( true );
+	}
 }
 
