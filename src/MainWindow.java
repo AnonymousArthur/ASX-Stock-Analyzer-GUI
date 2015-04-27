@@ -163,8 +163,8 @@ public class MainWindow extends JFrame implements ItemListener, ActionListener{
 			 RefineryUtilities.centerFrameOnScreen( chart );
 			 chart.setVisible( true );
 			 Profit profit = new Profit(
-					      "Proft" ,
-					      "Pofit over Time",
+					      "Profit" ,
+					      "Profit over Time",
 					      "summary.csv");
 			 profit.pack( );
 			 RefineryUtilities.centerFrameOnScreen( profit );

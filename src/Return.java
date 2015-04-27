@@ -21,26 +21,16 @@ public class Return extends ApplicationFrame {
 	private static final int DATE = 1;
 	private static final int PRICE = 2;
 	private static final int SINGAL = 5;
-	
+	public LinkedHashMap<String, ArrayList<Trade>> BSData;
 	private String inputFile;
 	private static final long serialVersionUID = 1L;
 	public Return(String applicationTitle, String chartTitle, String inputFile) {
 		super(applicationTitle);
-		LinkedHashMap<String, ArrayList<Trade>> BSData = CSVParser.SummaryParse(inputFile);	
-		for (Entry<String, ArrayList<Trade>> entry : BSData.entrySet()) {
-		    String key = entry.getKey();
-		    ArrayList<Trade> value = entry.getValue();
-		    for (Iterator iterator = value.iterator(); iterator.hasNext();) {
-				Trade trade = (Trade) iterator.next();
-				System.out.println(key+trade.date+trade.price+trade.signal);
-			}
-		}
+		BSData = CSVParser.SummaryParse(inputFile);	
+		
 		/////////Arthur: Code up here is iteration of the summary data set. 
-		
-		
-		
 		JFreeChart lineChart = ChartFactory.createLineChart(chartTitle,
-				"Years", "Price", createDataset(), PlotOrientation.VERTICAL,
+				"Years", "Return", createDataset(), PlotOrientation.VERTICAL,
 				true, true, false);
 
 		ChartPanel chartPanel = new ChartPanel(lineChart);
@@ -51,41 +41,15 @@ public class Return extends ApplicationFrame {
 	private DefaultCategoryDataset createDataset( )
 	   {
 	      DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
-	      BufferedReader br = null;
-		   String line = "";
-		   String cvsSplitBy = ",";
-
-		   try {
-				br = new BufferedReader(new FileReader(inputFile));
-				while ((line = br.readLine()) != null ) {
-					// use comma as separator
-					String[] trade = line.split(cvsSplitBy);
-					//
-					if(!trade[0].equals("#RIC") && !trade[8].isEmpty()){
-						//Adds data
-						//Value, category, x-value
-						dataset.addValue(Double.parseDouble(trade[PRICE]) , trade[COMPANY] , trade[DATE] );    
-						//System.out.println(trade[8]);
-					}
+		   for (Entry<String, ArrayList<Trade>> entry : BSData.entrySet()) {
+			    String key = entry.getKey();
+			    ArrayList<Trade> value = entry.getValue();
+			    for (Iterator<Trade> iterator = value.iterator(); iterator.hasNext();) {
+					Trade trade = (Trade) iterator.next();
+					//System.out.println(key+trade.date+trade.price+trade.signal);
+					dataset.addValue(trade.price, key, trade.date);
 				}
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				if (br != null) {
-					try {
-						br.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}
+		   }		   
 	      return dataset;
 	   }
 

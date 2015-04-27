@@ -66,7 +66,7 @@ public Profit( String applicationTitle , String chartTitle, String inputFile )
 					} else if (trade[SIGNAL].equals("B")){
 						value = profits.get(trade[COMPANY]) - Double.parseDouble(trade[VALUE]);
 					}
-					profits.replace(trade[COMPANY], value);
+					//This Line is Wrong//profits.replace(trade[COMPANY], value);
 					dataset.addValue(profits.get(trade[COMPANY]) , trade[COMPANY] , trade[DATE] );    
 					//System.out.println(trade[8]);
 					i++;
