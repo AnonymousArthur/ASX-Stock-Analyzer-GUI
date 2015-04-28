@@ -74,8 +74,9 @@ public class ComputeListsenr {
 					// System.out.println("DONE");
 					// create graph
 					// price graph
+					ArrayList<TradeRec> tradeRecs = CSVParser.CSVParse(filepath);
 					LinkedHashMap<String, ArrayList<Trade>> trades = CSVParser.SummaryParse("summary.csv");
-
+					
 					Price price = new Price("Price", "Price over Time",
 							inpuFilePath);
 					price_p.add("Price of " + fileName, price.get_chartPanel());
