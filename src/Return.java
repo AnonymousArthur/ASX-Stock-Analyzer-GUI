@@ -24,7 +24,7 @@ public class Return {
 		this.trades = trades;
 		this.company = company;
 		JFreeChart jfreechart = ChartFactory.createScatterPlot(
-				"Scatter Plot Demo 2", "X", "Y", createDataset(),
+				"Return over Transactions", "Return", "Transactions", createDataset(),
 				PlotOrientation.VERTICAL, true, true, false);
 		XYPlot xyPlot = (XYPlot) jfreechart.getPlot();
 		xyPlot.setDomainCrosshairVisible(true);
@@ -45,13 +45,13 @@ public class Return {
 		for (int i = 0; i != trades.size(); i++) {			
 			if (i != 0 && trades.get(i).signal == 'S') {
 				// Cost of Investment
-				double COI = trades.get(i - 1).price * trades.get(i - 1).volume;
+				double COI = trades.get(i - 1).price; //* trades.get(i - 1).volume;
 				// Return of Investment
-				double ROI = trades.get(i).price * trades.get(i).volume;
+				double ROI = trades.get(i).price; //* trades.get(i).volume;
 				// Rate of R
 				double ROR = (COI - ROI) / COI;
 				//dataset.addValue(ROR, company, trades.get(i).date);
-				if(ROR>0){
+				if(ROR>=0){
 					gainSeries.add(j,ROR);
 				}else{
 					loseSeries.add(j,ROR);
