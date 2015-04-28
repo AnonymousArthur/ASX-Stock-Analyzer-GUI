@@ -23,13 +23,6 @@ public class Return {
 			ArrayList<Trade> trades, String company) {
 		this.trades = trades;
 		this.company = company;
-		/*
-		 * JFreeChart lineChart = ChartFactory.createLineChart(chartTitle,
-		 * "Years", "Return", createDataset(), PlotOrientation.VERTICAL, true,
-		 * true, false);
-		 * 
-		 * chartPanel = new ChartPanel(lineChart);
-		 */
 		JFreeChart jfreechart = ChartFactory.createScatterPlot(
 				"Scatter Plot Demo 2", "X", "Y", createDataset(),
 				PlotOrientation.VERTICAL, true, true, false);
@@ -44,7 +37,6 @@ public class Return {
 		chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 	}
 
-	//private DefaultCategoryDataset createDataset() {
 	private XYDataset createDataset() {
 		XYSeriesCollection xySeriesCollection = new XYSeriesCollection();
 		XYSeries gainSeries = new XYSeries("Gain");

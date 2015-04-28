@@ -73,14 +73,16 @@ public class ComputeListsenr {
 					// System.out.println(new String(c));
 					// System.out.println("DONE");
 					// create graph
-					// price graph
-					ArrayList<TradeRec> tradeRecs = CSVParser.CSVParse(filepath);
+					
+					LinkedHashMap<String, ArrayList<TradeRec>> dataHashMap = CSVParser.CSVParse(inpuFilePath);
 					LinkedHashMap<String, ArrayList<Trade>> trades = CSVParser.SummaryParse("summary.csv");
 					
-					Price price = new Price("Price", "Price over Time",
-							inpuFilePath);
-					price_p.add("Price of " + fileName, price.get_chartPanel());
-					
+					// price graph
+					for(String company: dataHashMap.keySet()){
+						Price price = new Price("Price - ", "Price over Time",
+							dataHashMap.get(company),trades.get(company));
+						price_p.add("Price of " + fileName, price.get_chartPanel());
+					}
 					
 					// profit graph
 					for(String company: trades.keySet()){
