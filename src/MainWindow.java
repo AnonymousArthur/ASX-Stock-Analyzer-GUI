@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,6 +42,11 @@ public class MainWindow extends JFrame implements ItemListener{
 	private Arguments_form arguments_form_module1;
 	private ComputeListsenr compute_listsener_module1;
 	final JTabbedPane jtp_module1 = new JTabbedPane();
+	final JTabbedPane jtp_module1_types = new JTabbedPane();
+	final JTabbedPane price_p = new JTabbedPane();
+	final JTabbedPane profit_p = new JTabbedPane();
+	final JTabbedPane return_p = new JTabbedPane();
+	
 	
 	//arguments for module2
 	final static JPanel card2 = new JPanel();
@@ -73,6 +79,8 @@ public class MainWindow extends JFrame implements ItemListener{
 	    
 
 	    
+
+	    
 	    //JLabel L_input_file_name = new JLabel();
 	    L_input_file_name.setText("Select file");
 	    card1.add(arguments_form_module1.get_Panel());
@@ -94,18 +102,30 @@ public class MainWindow extends JFrame implements ItemListener{
 				}						
 			}		
 		});
-	    compute_listsener_module1 = new ComputeListsenr( arguments_form_module1, card1, jtp_module1);
+	    compute_listsener_module1 = new ComputeListsenr( arguments_form_module1, card1, jtp_module1,price_p,profit_p,return_p);
 	    B_Compute.addActionListener(compute_listsener_module1.returnListener());
 	    
 	    
 	    JPanel card2 = new JPanel();
 	    card2.add(new JButton("Input Data"));
 	    card2.add(new JButton("Compute"));
-	     
+	    
 	    //Create the panel that contains the "cards".
 	    cards = new JPanel(new CardLayout());
 	    cards.add(card1, MODULE1);
 	    cards.add(card2, MODULE2);
+	    
+	    price_p.setPreferredSize( new Dimension( 740, 580 ) );
+	    profit_p.setPreferredSize( new Dimension( 740, 580 ) );
+	    return_p.setPreferredSize( new Dimension( 740, 580 ) );
+	    
+	    
+	    jtp_module1_types.add("Price", price_p);
+	    jtp_module1_types.add("Profit", profit_p);
+	    jtp_module1_types.add("Return", return_p);
+	    
+
+		card1.add(jtp_module1_types, BorderLayout.CENTER);
 	     
 	    pane.add(comboBoxPane, BorderLayout.PAGE_START);
 	    pane.add(cards, BorderLayout.CENTER);

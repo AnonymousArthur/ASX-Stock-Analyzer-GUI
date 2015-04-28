@@ -18,9 +18,9 @@ public class ComputeListsenr {
 	ActionListener listener;
 	static String inpuFilePath;
 	static String fileName;
-
+	
 	public ComputeListsenr(final Arguments_form arguments_form_module1,
-			final JPanel card1, final JTabbedPane jtp) {
+			final JPanel card1, final JTabbedPane jtp, final JTabbedPane price_p, final JTabbedPane profit_p, final JTabbedPane return_p) {
 		listener = new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -78,8 +78,7 @@ public class ComputeListsenr {
 
 					Price price = new Price("Price", "Price over Time",
 							inpuFilePath);
-					card1.add(jtp, BorderLayout.CENTER);
-					jtp.add("Price of " + fileName, price.get_chartPanel());
+					price_p.add("Price of " + fileName, price.get_chartPanel());
 					
 					
 					// profit graph
@@ -89,13 +88,13 @@ public class ComputeListsenr {
 							      "Profit over Time",
 							      trades.get(company),
 							      company);
-					jtp.add("Profit of " + fileName, profit.get_chartPanel());
+					profit_p.add("Profit of " + fileName, profit.get_chartPanel());
 					// return graph
 					 Return return_ = new Return("Return - company", 
 		 					 "Return over Time", 
 		 					 trades.get(company), 
 		 					 company);
-					jtp.add("Return of " + fileName, return_.get_chartPanel());
+					return_p.add("Return of " + fileName, return_.get_chartPanel());
 					}
 				} catch (IOException e1) {
 					e1.printStackTrace();
