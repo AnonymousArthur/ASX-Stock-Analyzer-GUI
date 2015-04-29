@@ -18,9 +18,10 @@ public class ComputeListsenr {
 	ActionListener listener;
 	static String inpuFilePath;
 	static String fileName;
+	//private ArrayList<JTabbedPane> company_tabs = new ArrayList<>();
 	
-	public ComputeListsenr(final Arguments_form arguments_form_module1,
-			final JPanel card1, final JTabbedPane jtp, final JTabbedPane price_p, final JTabbedPane profit_p, final JTabbedPane return_p) {
+	
+	public ComputeListsenr(final Arguments_form arguments_form_module1, final JTabbedPane jtp_companies) {
 		listener = new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -76,28 +77,34 @@ public class ComputeListsenr {
 					
 					LinkedHashMap<String, ArrayList<TradeRec>> dataHashMap = CSVParser.CSVParse(inpuFilePath);
 					LinkedHashMap<String, ArrayList<Trade>> trades = CSVParser.SummaryParse("summary.csv");
-					
-					// price graph
+					/*
 					for(String company: dataHashMap.keySet()){
+						 JTabbedPane company_tab = new JTabbedPane();
+						 company_tabs.add(company_tab);
+						 //jtp_companies.add(company + " from " + fileName,company_tab);
+					}*/
+					
+					
+					for(String company: dataHashMap.keySet()){
+						JTabbedPane company_tab = new JTabbedPane();
+						jtp_companies.add(company + " from " + fileName,company_tab);
+					// price graph
 						Price price = new Price("Price - ", "Price over Time",
 							dataHashMap.get(company),trades.get(company));
-						price_p.add("Price of " + fileName, price.get_chartPanel());
-					}
-					
+						company_tab.add("Price", price.get_chartPanel());
+					// return graph
+						Return return_ = new Return("Return - company", 
+		 					 "Return over Time", 
+		 					 trades.get(company), 
+		 					 company);
+						company_tab.add("Return", return_.get_chartPanel());
 					// profit graph
-					for(String company: trades.keySet()){
-						 Profit profit = new Profit(
+						Profit profit = new Profit(
 							      "Profit - " + company ,
 							      "Profit over Time",
 							      trades.get(company),
 							      company);
-					profit_p.add("Profit of " + fileName, profit.get_chartPanel());
-					// return graph
-					 Return return_ = new Return("Return - company", 
-		 					 "Return over Time", 
-		 					 trades.get(company), 
-		 					 company);
-					return_p.add("Return of " + fileName, return_.get_chartPanel());
+						company_tab.add("Profit", profit.get_chartPanel());
 					}
 				} catch (IOException e1) {
 					e1.printStackTrace();
