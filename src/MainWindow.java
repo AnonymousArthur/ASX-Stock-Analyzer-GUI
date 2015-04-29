@@ -49,7 +49,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	
 	public MainWindow (){
 		this.setTitle("ALGORITHMIC TRADING");
-		this.setSize(1000, 700);
+		this.setSize(1000, 730);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 		createUI(this.getContentPane());
