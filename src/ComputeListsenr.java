@@ -28,7 +28,7 @@ public class ComputeListsenr {
 
 				// MAKE THIS VARIABLE
 				// Build string to run the jar
-				String filepath = "Awesome-MSM-1.5.jar";
+				String filepath = "Awesome-MSM-1.8.1.jar";
 				Process proc;
 				// Add input file parameter
 				String execCommand = "java -jar " + filepath;

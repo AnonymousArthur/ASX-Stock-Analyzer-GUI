@@ -24,7 +24,7 @@ public class Return {
 		this.trades = trades;
 		this.company = company;
 		JFreeChart jfreechart = ChartFactory.createScatterPlot(
-				"Return over Transactions", "Return", "Transactions", createDataset(),
+				"Return over Transactions","Transactions" , "Return", createDataset(),
 				PlotOrientation.VERTICAL, true, true, false);
 		XYPlot xyPlot = (XYPlot) jfreechart.getPlot();
 		xyPlot.setDomainCrosshairVisible(true);
@@ -42,23 +42,36 @@ public class Return {
 		XYSeries gainSeries = new XYSeries("Gain");
 		XYSeries loseSeries = new XYSeries("lose");
 		int j = 0;
-		for (int i = 0; i != trades.size(); i++) {			
-			if (i != 0 && trades.get(i).signal == 'S') {
-				// Cost of Investment
-				double COI = trades.get(i - 1).price; //* trades.get(i - 1).volume;
-				// Return of Investment
-				double ROI = trades.get(i).price; //* trades.get(i).volume;
-				// Rate of R
-				double ROR = (COI - ROI) / COI;
-				//dataset.addValue(ROR, company, trades.get(i).date);
-				if(ROR>=0){
-					gainSeries.add(j,ROR);
-				}else{
-					loseSeries.add(j,ROR);
-				}
-				j++;
+		double R = 0;
+		for (int i = 0; i < trades.size(); i++) {
+			Trade trade1 = trades.get(i);
+			Trade trade2;
+			
+			if ((trades.size() - 1) > (i + 1)) {
+				trade2 = trades.get(i + 1);
+			} else {
+				break;
 			}
+			String buy = "B";
+			double COI = 0;
+			double ROI = 0;
+			if(trade1.signal == buy.charAt(0)){
+				COI = trade1.price;
+				ROI = trade2.price;
+			}else{
+				COI = trade2.price;
+				ROI = trade1.price;
+			}
+			double ROR = (ROI - COI) / COI;
+			if(ROR>=0){
+				gainSeries.add(j,ROR);
+			}else{
+				loseSeries.add(j,ROR);
+			}
+			R = R + ROR;
+			j++;
 		}
+		System.out.println("Total return: " + R * 100 + "%");
 		xySeriesCollection.addSeries(gainSeries);
 		xySeriesCollection.addSeries(loseSeries);
 		return xySeriesCollection;

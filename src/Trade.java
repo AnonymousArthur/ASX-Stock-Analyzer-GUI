@@ -12,7 +12,7 @@ public class Trade {
 	public char signal;
 	
 	public Trade(String d,double price,double volume,char signal){
-		DateFormat format = new SimpleDateFormat("dd-mm-yyyy", Locale.ENGLISH);
+		DateFormat format = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
 		try {
 			this.date = format.parse(d);
 		} catch (ParseException e) {
