@@ -41,11 +41,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	final static JPanel card1 = new JPanel();
 	private Arguments_form arguments_form_module1;
 	private ComputeListsenr compute_listsener_module1;
-	final JTabbedPane jtp_module1 = new JTabbedPane();
-	final JTabbedPane jtp_module1_types = new JTabbedPane();
-	final JTabbedPane price_p = new JTabbedPane();
-	final JTabbedPane profit_p = new JTabbedPane();
-	final JTabbedPane return_p = new JTabbedPane();
+	final JTabbedPane jtp_module1_companies = new JTabbedPane();
 	
 	
 	//arguments for module2
@@ -53,7 +49,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	
 	public MainWindow (){
 		this.setTitle("ALGORITHMIC TRADING");
-		this.setSize(900, 800);
+		this.setSize(1000, 700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 		createUI(this.getContentPane());
@@ -77,10 +73,6 @@ public class MainWindow extends JFrame implements ItemListener{
 
 	    arguments_form_module1 = new Arguments_form();
 	    
-
-	    
-
-	    
 	    //JLabel L_input_file_name = new JLabel();
 	    L_input_file_name.setText("Select file");
 	    card1.add(arguments_form_module1.get_Panel());
@@ -102,7 +94,7 @@ public class MainWindow extends JFrame implements ItemListener{
 				}						
 			}		
 		});
-	    compute_listsener_module1 = new ComputeListsenr( arguments_form_module1, card1, jtp_module1,price_p,profit_p,return_p);
+	    compute_listsener_module1 = new ComputeListsenr( arguments_form_module1, jtp_module1_companies);
 	    B_Compute.addActionListener(compute_listsener_module1.returnListener());
 	    
 	    
@@ -115,18 +107,10 @@ public class MainWindow extends JFrame implements ItemListener{
 	    cards.add(card1, MODULE1);
 	    cards.add(card2, MODULE2);
 	    
-	    price_p.setPreferredSize( new Dimension( 740, 580 ) );
-	    profit_p.setPreferredSize( new Dimension( 740, 580 ) );
-	    return_p.setPreferredSize( new Dimension( 740, 580 ) );
+	    jtp_module1_companies.setPreferredSize(new Dimension( 740, 580 ));
 	    
+		card1.add(jtp_module1_companies, BorderLayout.CENTER);
 	    
-	    jtp_module1_types.add("Price", price_p);
-	    jtp_module1_types.add("Profit", profit_p);
-	    jtp_module1_types.add("Return", return_p);
-	    
-
-		card1.add(jtp_module1_types, BorderLayout.CENTER);
-	     
 	    pane.add(comboBoxPane, BorderLayout.PAGE_START);
 	    pane.add(cards, BorderLayout.CENTER);
 		}
