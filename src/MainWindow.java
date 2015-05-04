@@ -28,7 +28,7 @@ import org.jfree.ui.RefineryUtilities;
 
 public class MainWindow extends JFrame implements ItemListener{
     /**
-	 * 
+	 *  
 	 */
 	private String filename;
 	public static String inpuFilePath;

@@ -5,7 +5,7 @@ import javax.swing.SpringLayout;
 
 
 public class Arguments_form {
-	JPanel p;
+	JPanel p; 
 	private int window = 3;
 	private double threshold = 0.001;
 	private JTextField window_field = new JTextField(10);

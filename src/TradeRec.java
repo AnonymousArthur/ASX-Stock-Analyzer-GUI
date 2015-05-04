@@ -1,5 +1,5 @@
 import java.util.Date;
-
+ 
 //UNSW CSE SENG3011 Team Awesome Copyright Reserved
 public class TradeRec {
 	String ric;

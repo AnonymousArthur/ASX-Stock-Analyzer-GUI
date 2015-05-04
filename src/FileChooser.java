@@ -1,7 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JFileChooser;
-
+ 
 public class FileChooser {
 	private static String filePath;
 	private static String fileName;
