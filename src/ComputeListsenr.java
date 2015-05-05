@@ -21,7 +21,7 @@ public class ComputeListsenr {
 	//private ArrayList<JTabbedPane> company_tabs = new ArrayList<>();
 	
 	
-	public ComputeListsenr(final Arguments_form arguments_form_module1, final JTabbedPane jtp_companies) {
+	public ComputeListsenr(final Arguments_form arguments_form_module1, final JTabbedPane jtp_companies, String module) {
 		listener = new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -29,34 +29,40 @@ public class ComputeListsenr {
 
 				// MAKE THIS VARIABLE
 				// Build string to run the jar
-				String filepath = "Awesome-MSM-1.8.1.jar";
+				String filepath = module;
 				Process proc;
 				// Add input file parameter
 				String execCommand = "java -jar " + filepath;
-				// Add fileName of parameters file
-				execCommand = execCommand + " " + inpuFilePath
-						+ " parameters.txt";
-				// Create parameters.txt file
-				int window = 3;
-				double threshold = 0.001;
-				// Add window, default value is 3 if empty
-				window = arguments_form_module1.getWindow();
-				// Add threshold, default value is 0.001 if empty
-				threshold = arguments_form_module1.getThreshold();
+				if(module == "Awesome-MSM-1.8.1.jar"){
+					// Add fileName of parameters file
+					execCommand = execCommand + " " + inpuFilePath
+							+ " parameters.txt";
+					// Create parameters.txt file
+					int window = 3;
+					double threshold = 0.001;
+					// Add window, default value is 3 if empty
+					window = arguments_form_module1.getWindow();
+					// Add threshold, default value is 0.001 if empty
+					threshold = arguments_form_module1.getThreshold();
 
-				File fileTemp = new File("parameters.txt");
-				if (fileTemp.exists()) {
-					fileTemp.delete();
-				}
-				try (PrintWriter out = new PrintWriter(new BufferedWriter(
-						new FileWriter("parameters.txt", true)))) {
-					out.println("window = " + window);
-					out.println("threshold = " + threshold);
-					out.println("output = summary.csv");
-				} catch (IOException e1) {
-				}
+					File fileTemp = new File("parameters.txt");
+					if (fileTemp.exists()) {
+						fileTemp.delete();
+					}
+					try (PrintWriter out = new PrintWriter(new BufferedWriter(
+							new FileWriter("parameters.txt", true)))) {
+						out.println("window = " + window);
+						out.println("threshold = " + threshold);
+						out.println("output = summary.csv");
+					} catch (IOException e1) {
+					}
 				// System.out.println(execCommand);
 				// Run module
+				}
+				if(module =="aurora.jar"){
+					execCommand = execCommand + " " + inpuFilePath
+							+ " aurora_params.txt";
+				}
 				try {
 
 					// System.out.println("FSDFDSFds");
@@ -74,9 +80,19 @@ public class ComputeListsenr {
 					// System.out.println(new String(c));
 					// System.out.println("DONE");
 					// create graph
-					
-					LinkedHashMap<String, ArrayList<TradeRec>> dataHashMap = CSVParser.CSVParse(inpuFilePath);
-					LinkedHashMap<String, ArrayList<Trade>> trades = CSVParser.SummaryParse("summary.csv");
+					System.out.println(module);
+					LinkedHashMap<String, ArrayList<TradeRec>> dataHashMap = new LinkedHashMap<String, ArrayList<TradeRec>>();
+					LinkedHashMap<String, ArrayList<Trade>> trades = new LinkedHashMap<String, ArrayList<Trade>>(); 
+					if(module == "Awesome-MSM-1.8.1.jar"){
+						dataHashMap = CSVParser.CSVParse(inpuFilePath, module);
+						trades = CSVParser.SummaryParse("summary.csv", module);
+					}
+					else
+						//(module == "aurora.jar")
+						{
+						dataHashMap = CSVParser.CSVParse(inpuFilePath, module);
+						trades = CSVParser.SummaryParse("output.csv", module);
+					}
 					/*
 					for(String company: dataHashMap.keySet()){
 						 JTabbedPane company_tab = new JTabbedPane();

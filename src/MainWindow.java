@@ -34,16 +34,16 @@ public class MainWindow extends JFrame implements ItemListener{
 	public static String inpuFilePath;
 	private static final long serialVersionUID = 1L;
 	private static JPanel cards = null;
-    final static String MODULE1 = "Module1";
-    final static String MODULE2 = "Module2";
+    final static String MODULE1 = "Awesome MSM";
+    final static String MODULE2 = "Aurora";
     final static JLabel L_input_file_name = new JLabel();
 	//arguments for module1
 	final static JPanel card1 = new JPanel();
 	private Arguments_form arguments_form_module1;
 	private ComputeListsenr compute_listsener_module1;
-	private OtherModuleListener other_module_listener;
 	final JTabbedPane jtp_module1_companies = new JTabbedPane();
 	final JTabbedPane jtp_module2_companies = new JTabbedPane();
+    public static String module;
 	
 	//arguments for module2
 	final static JPanel card2 = new JPanel();
@@ -90,12 +90,13 @@ public class MainWindow extends JFrame implements ItemListener{
 					L_input_file_name.setText(fileChooser.getName()+" loaded");
 					compute_listsener_module1.setFileName(filename);
 					compute_listsener_module1.setFilePath(inpuFilePath);
+					
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}						
 			}		
 		});
-	    compute_listsener_module1 = new ComputeListsenr( arguments_form_module1, jtp_module1_companies);
+	    compute_listsener_module1 = new ComputeListsenr( arguments_form_module1, jtp_module1_companies, "Awesome-MSM-1.8.1.jar");
 	    B_Compute.addActionListener(compute_listsener_module1.returnListener());
 	    
 	    
@@ -112,16 +113,16 @@ public class MainWindow extends JFrame implements ItemListener{
 					inpuFilePath = fileChooser.getPath();
 					filename = fileChooser.getName();
 					L_input_file_name.setText(fileChooser.getName()+" loaded");
-					other_module_listener.setFileName(filename);
-					other_module_listener.setFilePath(inpuFilePath);
+					compute_listsener_module1.setFileName(filename);
+					compute_listsener_module1.setFilePath(inpuFilePath);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}						
 			}		
 		});
-	    
-	    other_module_listener = new OtherModuleListener(jtp_module2_companies);
-	    C_Compute.addActionListener(other_module_listener.returnListener());
+
+	    compute_listsener_module1 = new ComputeListsenr(arguments_form_module1, jtp_module2_companies, "aurora.jar");
+	    C_Compute.addActionListener(compute_listsener_module1.returnListener());
 	    
 	    card2.add(C_Input_Data);
 	    card2.add(L_input_file_name);

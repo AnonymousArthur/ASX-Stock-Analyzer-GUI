@@ -20,7 +20,7 @@ public class CSVParser {
 	}
 
 	public static LinkedHashMap<String, ArrayList<TradeRec>> CSVParse(
-			String csvPath) {
+			String csvPath, String module) {
 		ArrayList<TradeRec> tradeRecs = null;
 		LinkedHashMap<String, ArrayList<TradeRec>> dataHashMap = new LinkedHashMap<String, ArrayList<TradeRec>>();
 		BufferedReader br = null;
@@ -37,6 +37,7 @@ public class CSVParser {
 						TradeRec newTradeRec = new TradeRec();
 						DateFormat format = new SimpleDateFormat("dd-MMM-yyyy",
 								Locale.ENGLISH);
+					
 						Date date = null;
 						try {
 							date = format.parse(trade[1]);
@@ -118,7 +119,7 @@ public class CSVParser {
 	}
 
 	public static LinkedHashMap<String, ArrayList<Trade>> SummaryParse(
-			String inputFile) {
+			String inputFile, String module) {
 		ArrayList<Trade> BS = null;
 		LinkedHashMap<String, ArrayList<Trade>> bsHashMap = new LinkedHashMap<String, ArrayList<Trade>>();
 		BufferedReader br = null;
@@ -129,19 +130,23 @@ public class CSVParser {
 			while ((line = br.readLine()) != null) {
 				// use comma as separator
 				String[] trade = line.split(cvsSplitBy);
-				if (!trade[0].equals("#RIC")) {
+				String check = "#RIC";
+				if(module == "aurora.jar"){
+					check = "Company name";
+				}
+				if (!trade[0].equals(check)) {
 					if (bsHashMap.containsKey(trade[0])) {
 						Trade newTrade = new Trade(trade[1],
 								Double.parseDouble(trade[2]),
 								Double.parseDouble(trade[3]),
-								trade[5].charAt(0));
+								trade[5].charAt(0), module);
 						BS.add(newTrade);
 					} else {
 						BS = new ArrayList<Trade>();
 						Trade newTrade = new Trade(trade[1],
 								Double.parseDouble(trade[2]),
 								Double.parseDouble(trade[3]),
-								trade[5].charAt(0));
+								trade[5].charAt(0), module);
 						BS.add(newTrade);
 						bsHashMap.put(trade[0], BS);
 					}
