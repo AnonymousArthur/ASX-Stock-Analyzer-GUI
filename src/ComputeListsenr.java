@@ -62,6 +62,26 @@ public class ComputeListsenr {
 				if(module =="aurora.jar"){
 					execCommand = execCommand + " " + inpuFilePath
 							+ " aurora_params.txt";
+					int window = 3;
+					double threshold = 0.001;
+					// Add window, default value is 3 if empty
+					window = arguments_form_module1.getWindow();
+					// Add threshold, default value is 0.001 if empty
+					threshold = arguments_form_module1.getThreshold();
+
+					File fileTemp = new File("aurora_params.txt");
+					if (fileTemp.exists()) {
+						fileTemp.delete();
+					}
+					try (PrintWriter out = new PrintWriter(new BufferedWriter(
+							new FileWriter("aurora_params.txt", true)))) {
+						out.println("start_date = 31-Jan-2000");
+						out.println("end_date = 08-May-2001");
+						out.println("moving_average_window = " + window);
+						out.println("threshold = " + threshold);
+						out.println("output_dir = output.csv");
+					} catch (IOException e1) {
+					}
 				}
 				try {
 
