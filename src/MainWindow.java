@@ -40,7 +40,9 @@ public class MainWindow extends JFrame implements ItemListener{
 	//arguments for module1
 	final static JPanel card1 = new JPanel();
 	private Arguments_form arguments_form_module1;
+	private Arguments_form arguments_form_module2;
 	private ComputeListsenr compute_listsener_module1;
+	private ComputeListsenr compute_listsener_module2;
 	final JTabbedPane jtp_module1_companies = new JTabbedPane();
 	final JTabbedPane jtp_module2_companies = new JTabbedPane();
     public static String module;
@@ -101,8 +103,9 @@ public class MainWindow extends JFrame implements ItemListener{
 	    
 	    
 	    
-	    
+	   
 	    JPanel card2 = new JPanel();
+	    arguments_form_module2 = new Arguments_form();
 	    JButton C_Input_Data = new JButton("Input CSV");
 	    JButton C_Compute = new JButton("Compute");
 	    
@@ -113,17 +116,17 @@ public class MainWindow extends JFrame implements ItemListener{
 					inpuFilePath = fileChooser.getPath();
 					filename = fileChooser.getName();
 					L_input_file_name.setText(fileChooser.getName()+" loaded");
-					compute_listsener_module1.setFileName(filename);
-					compute_listsener_module1.setFilePath(inpuFilePath);
+					compute_listsener_module2.setFileName(filename);
+					compute_listsener_module2.setFilePath(inpuFilePath);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}						
 			}		
 		});
 
-	    compute_listsener_module1 = new ComputeListsenr(arguments_form_module1, jtp_module2_companies, "aurora.jar");
-	    C_Compute.addActionListener(compute_listsener_module1.returnListener());
-	    
+	    compute_listsener_module2 = new ComputeListsenr(arguments_form_module2, jtp_module2_companies, "aurora.jar");
+	    C_Compute.addActionListener(compute_listsener_module2.returnListener());
+	    card2.add(arguments_form_module2.get_Panel());
 	    card2.add(C_Input_Data);
 	    card2.add(L_input_file_name);
 	    card2.add(C_Compute);
@@ -158,4 +161,3 @@ public class MainWindow extends JFrame implements ItemListener{
 	}
 
 }
-
