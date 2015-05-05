@@ -43,7 +43,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	private ComputeListsenr compute_listsener_module1;
 	private OtherModuleListener other_module_listener;
 	final JTabbedPane jtp_module1_companies = new JTabbedPane();
-	
+	final JTabbedPane jtp_module2_companies = new JTabbedPane();
 	
 	//arguments for module2
 	final static JPanel card2 = new JPanel();
@@ -99,6 +99,8 @@ public class MainWindow extends JFrame implements ItemListener{
 	    B_Compute.addActionListener(compute_listsener_module1.returnListener());
 	    
 	    
+	    
+	    
 	    JPanel card2 = new JPanel();
 	    JButton C_Input_Data = new JButton("Input CSV");
 	    JButton C_Compute = new JButton("Compute");
@@ -118,10 +120,11 @@ public class MainWindow extends JFrame implements ItemListener{
 			}		
 		});
 	    
-	    other_module_listener = new OtherModuleListener(jtp_module1_companies);
+	    other_module_listener = new OtherModuleListener(jtp_module2_companies);
 	    C_Compute.addActionListener(other_module_listener.returnListener());
 	    
 	    card2.add(C_Input_Data);
+	    card2.add(L_input_file_name);
 	    card2.add(C_Compute);
 	    
 	    
@@ -136,8 +139,11 @@ public class MainWindow extends JFrame implements ItemListener{
 	    cards.add(card2, MODULE2);
 	    
 	    jtp_module1_companies.setPreferredSize(new Dimension( 740, 580 ));
+	    jtp_module2_companies.setPreferredSize(new Dimension( 740, 580 ));
 	    
 		card1.add(jtp_module1_companies, BorderLayout.CENTER);
+		card2.add(jtp_module2_companies, BorderLayout.CENTER);
+
 	    
 	    pane.add(comboBoxPane, BorderLayout.PAGE_START);
 	    pane.add(cards, BorderLayout.CENTER);
