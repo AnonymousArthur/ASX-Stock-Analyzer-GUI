@@ -70,13 +70,13 @@ public class OtherModuleListener {
 							dataHashMap.get(company),trades.get(company));
 						company_tab.add("Price", price.get_chartPanel());
 					// return graph
-						Return return_ = new Return("Return - company", 
+						Return2 return_ = new Return2("Return - company", 
 		 					 "Return over Time", 
 		 					 trades.get(company), 
 		 					 company);
 						company_tab.add("Return", return_.get_chartPanel());
 					// profit graph
-						Profit profit = new Profit(
+						Profit2 profit = new Profit2(
 							      "Profit - " + company ,
 							      "Profit over Time",
 							      trades.get(company),
