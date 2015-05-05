@@ -41,6 +41,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	final static JPanel card1 = new JPanel();
 	private Arguments_form arguments_form_module1;
 	private ComputeListsenr compute_listsener_module1;
+	private OtherModuleListener other_module_listener;
 	final JTabbedPane jtp_module1_companies = new JTabbedPane();
 	
 	
@@ -99,8 +100,35 @@ public class MainWindow extends JFrame implements ItemListener{
 	    
 	    
 	    JPanel card2 = new JPanel();
-	    card2.add(new JButton("Input Data"));
-	    card2.add(new JButton("Compute"));
+	    JButton C_Input_Data = new JButton("Input CSV");
+	    JButton C_Compute = new JButton("Compute");
+	    
+	    C_Input_Data.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					FileChooser fileChooser = new FileChooser();
+					inpuFilePath = fileChooser.getPath();
+					filename = fileChooser.getName();
+					L_input_file_name.setText(fileChooser.getName()+" loaded");
+					other_module_listener.setFileName(filename);
+					other_module_listener.setFilePath(inpuFilePath);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}						
+			}		
+		});
+	    
+	    other_module_listener = new OtherModuleListener(jtp_module1_companies);
+	    C_Compute.addActionListener(other_module_listener.returnListener());
+	    
+	    card2.add(C_Input_Data);
+	    card2.add(C_Compute);
+	    
+	    
+	    
+	    
+	    
+	    
 	    
 	    //Create the panel that contains the "cards".
 	    cards = new JPanel(new CardLayout());
