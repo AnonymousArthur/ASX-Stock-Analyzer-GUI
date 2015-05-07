@@ -40,11 +40,16 @@ public class ComputeListsenr {
 					// Create parameters.txt file
 					int window = 3;
 					double threshold = 0.001;
+					String sdate;
+					String edate;
 					// Add window, default value is 3 if empty
 					window = arguments_form_module1.getWindow();
 					// Add threshold, default value is 0.001 if empty
 					threshold = arguments_form_module1.getThreshold();
-
+                    sdate = arguments_form_module1.getsdate();
+                    edate = arguments_form_module1.getedate();
+                    
+					
 					File fileTemp = new File("parameters.txt");
 					if (fileTemp.exists()) {
 						fileTemp.delete();
@@ -52,7 +57,9 @@ public class ComputeListsenr {
 					try (PrintWriter out = new PrintWriter(new BufferedWriter(
 							new FileWriter("parameters.txt", true)))) {
 						out.println("window = " + window);
-						out.println("threshold = " + threshold);
+						out.println("threshold = " + threshold);						
+						out.println("startDate = " + sdate);
+						out.println("endDate = " + edate);
 						out.println("output = summary.csv");
 					} catch (IOException e1) {
 					}
@@ -64,19 +71,23 @@ public class ComputeListsenr {
 							+ " aurora_params.txt";
 					int window = 3;
 					double threshold = 0.001;
+					String sdate;
+					String edate;
 					// Add window, default value is 3 if empty
 					window = arguments_form_module1.getWindow();
 					// Add threshold, default value is 0.001 if empty
 					threshold = arguments_form_module1.getThreshold();
-
+                    sdate = arguments_form_module1.getsdate();
+                    edate = arguments_form_module1.getedate();
+                    
 					File fileTemp = new File("aurora_params.txt");
 					if (fileTemp.exists()) {
 						fileTemp.delete();
 					}
 					try (PrintWriter out = new PrintWriter(new BufferedWriter(
 							new FileWriter("aurora_params.txt", true)))) {
-						out.println("start_date = 31-Jan-2000");
-						out.println("end_date = 08-May-2001");
+						out.println("start_date = " + sdate);
+						out.println("end_date = " + edate);
 						out.println("moving_average_window = " + window);
 						out.println("threshold = " + threshold);
 						out.println("output_dir = output.csv");
