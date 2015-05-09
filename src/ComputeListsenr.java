@@ -90,10 +90,41 @@ public class ComputeListsenr {
 						out.println("end_date = " + edate);
 						out.println("moving_average_window = " + window);
 						out.println("threshold = " + threshold);
-						out.println("output_dir = output.csv");
+						out.println("output_dir = aurora_output.csv");
 					} catch (IOException e1) {
 					}
 				}
+				
+				if(module =="trockAT"){
+					execCommand = "./trockAT" +   " trock_paramaters.txt";
+					int window = 3;
+					double threshold = 0.001;
+					String sdate;
+					String edate;
+					// Add window, default value is 3 if empty
+					window = arguments_form_module1.getWindow();
+					// Add threshold, default value is 0.001 if empty
+					threshold = arguments_form_module1.getThreshold();
+                    sdate = arguments_form_module1.getsdate();
+                    edate = arguments_form_module1.getedate();
+                    
+					File fileTemp = new File("trock_paramaters.txt");
+					if (fileTemp.exists()) {
+						fileTemp.delete();
+					}
+					try (PrintWriter out = new PrintWriter(new BufferedWriter(
+							new FileWriter("trock_paramaters.txt", true)))) {
+						out.println(":input_csvFile:" + inpuFilePath + "\\");
+						out.println(":output_csvFile:trock_output.csv\\");
+						out.println(":output_logFile:TrockAT.log\\");
+						out.println(":returnsInCalculation:" + window + "\\");
+						out.println(":threshold:" + threshold + "\\");
+						out.println(":startDate:" + sdate + "\\");
+						out.println(":endDate:" + edate + "\\");
+					} catch (IOException e1) {
+					}
+				}
+				
 				try {
 
 					// System.out.println("FSDFDSFds");
@@ -118,11 +149,16 @@ public class ComputeListsenr {
 						dataHashMap = CSVParser.CSVParse(inpuFilePath, module);
 						trades = CSVParser.SummaryParse("summary.csv", module);
 					}
-					else
+					else if(module == "aurora.jar")
 						//(module == "aurora.jar")
 						{
 						dataHashMap = CSVParser.CSVParse(inpuFilePath, module);
-						trades = CSVParser.SummaryParse("output.csv", module);
+						trades = CSVParser.SummaryParse("aurora_output.csv", module);
+					}
+					else{
+						dataHashMap = CSVParser.CSVParse(inpuFilePath, module);
+						trades = CSVParser.SummaryParse("trock_output.csv", module);
+					
 					}
 					/*
 					for(String company: dataHashMap.keySet()){
@@ -176,3 +212,4 @@ public class ComputeListsenr {
 	}
 
 }
+
