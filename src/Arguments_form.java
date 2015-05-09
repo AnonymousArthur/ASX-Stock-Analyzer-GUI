@@ -40,7 +40,7 @@ public class Arguments_form {
 	    
 	    VBox vbox = new VBox(20);
         vbox.setStyle("-fx-padding: 10;");
-        Scene scene = new Scene(vbox, 100, 200);
+        Scene scene = new Scene(vbox, 150, 40);
         //stage.setScene(scene);
         
         checkInDatePicker = new DatePicker();

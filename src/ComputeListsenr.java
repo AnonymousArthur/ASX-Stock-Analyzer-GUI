@@ -89,9 +89,12 @@ public class ComputeListsenr {
 						JTabbedPane company_tab = new JTabbedPane();
 						jtp_companies.add(company + " from " + fileName,company_tab);
 					// price graph
-						Price price = new Price("Price - ", "Price over Time",
-							dataHashMap.get(company),trades.get(company));
-						company_tab.add("Price", price.get_chartPanel());
+						//Price price = new Price("Price - ", "Price over Time",
+						//	dataHashMap.get(company),trades.get(company));
+						PriceFx price = new PriceFx("Price - ", "Price over Time",
+								dataHashMap.get(company),trades.get(company));
+						
+						company_tab.add("Price", price.get_p());
 					// return graph
 						Return return_ = new Return("Return - company", 
 		 					 "Return over Time", 
