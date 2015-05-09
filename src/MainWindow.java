@@ -71,7 +71,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	    JButton B_Compute = new JButton("Compute");
 	    
 
-	    arguments_form_module1 = new Arguments_form();
+	    arguments_form_module1 = new Arguments_form(card1);
 	    
 	    //JLabel L_input_file_name = new JLabel();
 	    L_input_file_name.setText("Select file");
