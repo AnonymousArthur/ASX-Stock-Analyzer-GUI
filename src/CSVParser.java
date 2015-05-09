@@ -134,6 +134,9 @@ public class CSVParser {
 				if(module == "aurora.jar"){
 					check = "Company name";
 				}
+				if(module == "trockAT"){
+					check = "#Company";
+				}
 				if (!trade[0].equals(check)) {
 					if (bsHashMap.containsKey(trade[0])) {
 						Trade newTrade = new Trade(trade[1],
