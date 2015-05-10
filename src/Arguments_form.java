@@ -1,18 +1,16 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
 import javafx.embed.swing.JFXPanel;
 import javafx.geometry.HPos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
+import javafx.util.StringConverter;
+import javafx.util.Callback;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -22,10 +20,11 @@ import javax.swing.SpringLayout;
 public class Arguments_form {
 	JPanel p; 
 	JFXPanel fxPanel = new JFXPanel();
-	public DatePicker checkInDatePicker_from;
-	public DatePicker checkInDatePicker_to;
+	public DatePicker startDatePicker;
+	public DatePicker endDatePicker;
 	//public Stage stage;
 	private final String datePattern = "dd-MMM-yyyy";
+	private final String placeHolder = "Optional";
 	private int window = 3;
 	private double threshold = 0.001;
 	private JTextField window_field = new JTextField(10);
@@ -34,18 +33,10 @@ public class Arguments_form {
 	public Arguments_form(JPanel card) {
 	    String[] labels = {"Window: ", "Threshold: "};
 	    int numPairs = labels.length;
-	    
-	    //Locale.setDefault(Locale.US);
-	    
-	    //stage.setTitle("Date Picker");
-	    
 	    VBox vbox = new VBox(20);
         vbox.setStyle("-fx-padding: 10;");
-        Scene scene = new Scene(vbox, 250, 100);
-        //stage.setScene(scene);
-        //Date from picker*************************************************************
-        checkInDatePicker_from = new DatePicker();
-        StringConverter converter_from = new StringConverter<LocalDate>() {
+        Scene scene = new Scene(vbox, 310, 80);              
+        StringConverter converter = new StringConverter<LocalDate>() {
             DateTimeFormatter dateFormatter = 
                 DateTimeFormatter.ofPattern(datePattern);
             @Override
@@ -64,58 +55,50 @@ public class Arguments_form {
                     return null;
                 }
             }
-        };             
-        checkInDatePicker_from.setConverter(converter_from);
-        //checkInDatePicker_from.setPromptText(datePattern.toLowerCase());
-        GridPane gridPane_from = new GridPane();
-        gridPane_from.setHgap(10);
-        gridPane_from.setVgap(10);
+        };
 
-        Label checkInlabel_from = new Label("Start Date:");
-        gridPane_from.add(checkInlabel_from, 0, 0);
-
-        GridPane.setHalignment(checkInlabel_from, HPos.LEFT);
-        gridPane_from.add(checkInDatePicker_from, 0, 1);
         
-        //Date to picker**********************************************************
-        checkInDatePicker_to = new DatePicker();
-        StringConverter converter_to = new StringConverter<LocalDate>() {
-            DateTimeFormatter dateFormatter = 
-                DateTimeFormatter.ofPattern(datePattern);
-            @Override
-            public String toString(LocalDate date) {
-                if (date != null) {
-                    return dateFormatter.format(date);
-                } else {
-                    return "";
+        startDatePicker = new DatePicker();
+        startDatePicker.setConverter(converter);
+        startDatePicker.setPromptText(placeHolder);
+        endDatePicker = new DatePicker();        
+        endDatePicker.setConverter(converter);
+        endDatePicker.setPromptText(placeHolder);
+        final Callback<DatePicker, DateCell> dayCellFactory = 
+                new Callback<DatePicker, DateCell>() {
+                    @Override
+                    public DateCell call(final DatePicker datePicker) {
+                        return new DateCell() {
+                            @Override
+                            public void updateItem(LocalDate item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if(startDatePicker.getValue() != null)
+                                if (item.isBefore(                              
+                                        startDatePicker.getValue().plusDays(1))
+                                    ) {
+                                        setDisable(true);
+                                        setStyle("-fx-background-color: #ffc0cb;");
+                                }   
+                        }
+                    };
                 }
-            }
-            @Override
-            public LocalDate fromString(String string) {
-                if (string != null && !string.isEmpty()) {
-                    return LocalDate.parse(string, dateFormatter);
-                } else {
-                    return null;
-                }
-            }
-        };             
-        checkInDatePicker_to.setConverter(converter_to);
-        //checkInDatePicker_from.setPromptText(datePattern.toLowerCase());
-        GridPane gridPane_to = new GridPane();
-        gridPane_to.setHgap(10);
-        gridPane_to.setVgap(10);
+            };
+        endDatePicker.setDayCellFactory(dayCellFactory);
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
 
-        Label checkInlabel_to = new Label("End Date:");
-        gridPane_to.add(checkInlabel_to, 1, 0);
+        Label startlabel= new Label("Start Date:");
+        gridPane.add(startlabel, 0, 0);
+        GridPane.setHalignment(startlabel, HPos.LEFT);
+        gridPane.add(startDatePicker, 2, 0);
+        Label endlabel = new Label("End Date:");
+        gridPane.add(endlabel, 0, 1);
+        GridPane.setHalignment(endlabel, HPos.LEFT);
+        gridPane.add(endDatePicker, 2, 1);
 
-        GridPane.setHalignment(checkInlabel_to, HPos.LEFT);
-        gridPane_to.add(checkInDatePicker_to, 1, 1);
-        //**********************************************
-        vbox.getChildren().addAll(new Label("Start"),checkInDatePicker_from, checkInDatePicker_to);
-	    
+        vbox.getChildren().add(gridPane);
         fxPanel.setScene(scene);
-        //stage.show();
-	    
 	    
 	    //Create and populate the panel.
 	    p = new JPanel(new SpringLayout());

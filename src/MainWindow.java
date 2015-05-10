@@ -15,6 +15,8 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javafx.stage.Stage;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -30,7 +32,6 @@ public class MainWindow extends JFrame implements ItemListener{
     /**
 	 *  
 	 */
-	private String filename;
 	public static String inpuFilePath;
 	private static final long serialVersionUID = 1L;
 	private static JPanel cards = null;
@@ -40,7 +41,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	//arguments for module1
 	final static JPanel card1 = new JPanel();
 	private Arguments_form arguments_form_module1;
-	private ComputeListsenr compute_listsener_module1;
+	public static ComputeListsenr compute_listsener_module1;
 	final JTabbedPane jtp_module1_companies = new JTabbedPane();
 	
 	
@@ -83,12 +84,8 @@ public class MainWindow extends JFrame implements ItemListener{
 	    B_Input_Data.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					FileChooser fileChooser = new FileChooser();
-					inpuFilePath = fileChooser.getPath();
-					filename = fileChooser.getName();
-					L_input_file_name.setText(fileChooser.getName()+" loaded");
-					compute_listsener_module1.setFileName(filename);
-					compute_listsener_module1.setFilePath(inpuFilePath);
+					FilePicker fileChooser = new FilePicker();
+					inpuFilePath = fileChooser.getPath();				
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}						
