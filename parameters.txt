@@ -1,12 +1,4 @@
-window = 10
-<<<<<<< HEAD
-threshold = 0.001
-startDate = 2012-05-14
-endDate = 2015-05-20
-output = summary.csv
-=======
 threshold = 0.01
 startDate = 05-May-2010
 endDate = 20-May-2015
 output = summary.csv
->>>>>>> origin/master
