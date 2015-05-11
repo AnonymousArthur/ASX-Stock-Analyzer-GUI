@@ -1,5 +1,5 @@
-start_date = 31-Jan-2000
-end_date = 08-May-2001
-moving_average_window = 3
-threshold = 0.0053
-output_dir = output.csv
+start_date = 12-JAN-2010
+end_date = 12-JAN-2011
+moving_average_window = 10
+threshold = 0.01
+output_dir = aurora_output.csv
