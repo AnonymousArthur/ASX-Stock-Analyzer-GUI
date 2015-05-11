@@ -53,26 +53,28 @@ public class ComputeListsenr {
 					window = arguments_form_module1.getWindow();
 					// Add threshold, default value is 0.001 if empty
 					threshold = arguments_form_module1.getThreshold();
-                     sdate = arguments_form_module1.getsdate();
-                    LocalDate sdate1 = arguments_form_module1.startDatePicker.getValue();
-                    edate = arguments_form_module1.getedate();
-                    LocalDate edate1 = arguments_form_module1.endDatePicker.getValue();
-                    String sdate2 = sdate1.toString();
-					String edate2 = edate1.toString();
-					Date date = null;
-					Date date2 = null;
-					DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-					DateFormat format2 = new SimpleDateFormat("dd-MMM-yyyy");
-					try {
-						date = format.parse(sdate2);
-						date2 = format.parse(edate2);
-					} catch (ParseException e2) {
-  						e2.printStackTrace();
-					}
-					sdate2 = format2.format(date);
-					edate2 = format2.format(date2);	
-                    
-					
+                     			sdate = arguments_form_module1.getsdate();
+                    			LocalDate sdate1 = arguments_form_module1.startDatePicker.getValue();
+                    			edate = arguments_form_module1.getedate();
+                			 LocalDate edate1 = arguments_form_module1.endDatePicker.getValue();
+                    			String sdate2 = "01-JAN-2000";
+                			String edate2 = "01-JAN-2016";
+                			 if(!(sdate1 == null || edate1 == null)){
+                    				sdate2 = sdate1.toString();
+                    				edate2 = edate1.toString();
+                    				Date date = null;
+                    				Date date2 = null;
+                    				DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+						DateFormat format2 = new SimpleDateFormat("dd-MMM-yyyy");
+						try {
+							date = format.parse(sdate2);
+							date2 = format.parse(edate2);
+						} catch (ParseException e2) {
+							e2.printStackTrace();
+						}
+						sdate2 = format2.format(date);
+						edate2 = format2.format(date2);	
+                			}
 					File fileTemp = new File("parameters.txt");
 					if (fileTemp.exists()) {
 						fileTemp.delete();
