@@ -221,11 +221,19 @@ public class ComputeListsenr {
 						JTabbedPane company_tab = new JTabbedPane();
 						jtp_companies.add(company + " from " + fileName,company_tab);
 					// price graph
-						Price price = new Price("Price - ", "Price over Time",
-							dataHashMap.get(company),trades.get(company),Date.from(arguments_form_module1.startDatePicker.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()),Date.from(arguments_form_module1.endDatePicker.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-						//PriceFx price = new PriceFx("Price - ", "Price over Time",
-						//		dataHashMap.get(company),trades.get(company));
-						
+
+						Date sDate;
+						Date eDate;
+					if(arguments_form_module1.startDatePicker.getValue()!=null && arguments_form_module1.endDatePicker.getValue()!=null){
+						 sDate = Date.from(arguments_form_module1.startDatePicker.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+						 eDate = Date.from(arguments_form_module1.endDatePicker.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+					}else{
+						sDate = null;
+						eDate = null;
+					}
+					Price price = new Price("Price - ", "Price over Time",
+							dataHashMap.get(company),trades.get(company),sDate,eDate);
+
 						company_tab.add("Price", price.get_chartPanel());
 					// return graph
 						Return return_ = new Return("Return - company", 
