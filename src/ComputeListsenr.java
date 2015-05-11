@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -46,8 +47,10 @@ public class ComputeListsenr {
 					window = arguments_form_module1.getWindow();
 					// Add threshold, default value is 0.001 if empty
 					threshold = arguments_form_module1.getThreshold();
-                    sdate = arguments_form_module1.getsdate();
+                     sdate = arguments_form_module1.getsdate();
+                    LocalDate sdate1 = arguments_form_module1.startDatePicker.getValue();
                     edate = arguments_form_module1.getedate();
+                    LocalDate edate1 = arguments_form_module1.endDatePicker.getValue();
                     
 					
 					File fileTemp = new File("parameters.txt");
@@ -58,8 +61,8 @@ public class ComputeListsenr {
 							new FileWriter("parameters.txt", true)))) {
 						out.println("window = " + window);
 						out.println("threshold = " + threshold);						
-						out.println("startDate = " + sdate);
-						out.println("endDate = " + edate);
+						out.println("startDate = " + sdate1);
+						out.println("endDate = " + edate1);
 						out.println("output = summary.csv");
 					} catch (IOException e1) {
 					}

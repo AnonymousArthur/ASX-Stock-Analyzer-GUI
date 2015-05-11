@@ -36,7 +36,7 @@ public class Arguments_form {
 
 	
 	public Arguments_form(JPanel card) {
-	    String[] labels = {"Window: ", "Threshold: ","StartDate", "EndDate"};
+	    String[] labels = {"Window: ", "Threshold: "};
 	    int numPairs = (labels.length)/2;
 	    VBox vbox = new VBox(20);
         vbox.setStyle("-fx-padding: 10;");
@@ -114,7 +114,7 @@ public class Arguments_form {
 	    p.add(threshold_label);
 	    threshold_label.setLabelFor(threshold_field);
 	    p.add(threshold_field);
-	    
+	   /**
 	    JLabel startdate_label = new JLabel("StartDate: ", JLabel.TRAILING);
 	    p.add(startdate_label);
 	    threshold_label.setLabelFor(startdate_field);
@@ -122,10 +122,9 @@ public class Arguments_form {
 
 	    JLabel enddate_label = new JLabel("EndDate: ", JLabel.TRAILING);
 	    p.add(enddate_label);
-	    
 	    threshold_label.setLabelFor(enddate_field);
 	    p.add(enddate_field);
-	    
+	    */
 	    	    card.add(fxPanel);
 	 	    //Lay out the panel.
 	    SpringUtilities.makeCompactGrid(p,
