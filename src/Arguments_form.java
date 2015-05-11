@@ -1,5 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 import javafx.embed.swing.JFXPanel;
 import javafx.geometry.HPos;
 import javafx.scene.Scene;
@@ -8,9 +10,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-
 import javafx.util.StringConverter;
 import javafx.util.Callback;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -38,6 +40,7 @@ public class Arguments_form {
 	public Arguments_form(JPanel card) {
 	    String[] labels = {"Window: ", "Threshold: "};
 	    int numPairs = (labels.length)/2;
+	    Locale.setDefault(Locale.ENGLISH);
 	    VBox vbox = new VBox(20);
         vbox.setStyle("-fx-padding: 10;");
         Scene scene = new Scene(vbox, 310, 80);              

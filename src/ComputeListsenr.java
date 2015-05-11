@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -221,7 +222,7 @@ public class ComputeListsenr {
 						jtp_companies.add(company + " from " + fileName,company_tab);
 					// price graph
 						Price price = new Price("Price - ", "Price over Time",
-							dataHashMap.get(company),trades.get(company));
+							dataHashMap.get(company),trades.get(company),Date.from(arguments_form_module1.startDatePicker.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()),Date.from(arguments_form_module1.endDatePicker.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 						//PriceFx price = new PriceFx("Price - ", "Price over Time",
 						//		dataHashMap.get(company),trades.get(company));
 						
@@ -243,6 +244,9 @@ public class ComputeListsenr {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
