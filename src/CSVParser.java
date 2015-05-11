@@ -136,7 +136,7 @@ public class CSVParser {
 				}
 				if(module == "trockAT"){
 					check = "#Company";
-				}
+				}				
 				if (!trade[0].equals(check)) {
 					if (bsHashMap.containsKey(trade[0])) {
 						Trade newTrade = new Trade(trade[1],
@@ -145,11 +145,13 @@ public class CSVParser {
 								trade[5].charAt(0), module);
 						BS.add(newTrade);
 					} else {
-						BS = new ArrayList<Trade>();
+						BS = new ArrayList<Trade>();					
 						Trade newTrade = new Trade(trade[1],
 								Double.parseDouble(trade[2]),
 								Double.parseDouble(trade[3]),
 								trade[5].charAt(0), module);
+						
+						
 						BS.add(newTrade);
 						bsHashMap.put(trade[0], BS);
 					}
