@@ -1,5 +1,5 @@
 window = 10
 threshold = 0.01
-startDate = 12-JAN-2010
-endDate = 12-JAN-2012
+startDate = 12-JAN-2012
+endDate = 12-JAN-2015
 output = summary.csv

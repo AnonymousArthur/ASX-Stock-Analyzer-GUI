@@ -174,6 +174,9 @@ public class ComputeListsenr {
 					// price graph
 						Price price = new Price("Price - ", "Price over Time",
 							dataHashMap.get(company),trades.get(company));
+						//PriceFx price = new PriceFx("Price - ", "Price over Time",
+						//		dataHashMap.get(company),trades.get(company));
+						
 						company_tab.add("Price", price.get_chartPanel());
 					// return graph
 						Return return_ = new Return("Return - company", 

@@ -1,5 +1,7 @@
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import org.jfree.data.time.Day;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -8,6 +10,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.DefaultShadowGenerator;
  
 public class Price {
 	/**
@@ -34,6 +37,9 @@ public class Price {
 				);
 		XYPlot xyplot = (XYPlot)chart.getPlot();
 		xyplot.setDomainCrosshairVisible(true);
+		xyplot.setBackgroundPaint(Color.WHITE);
+		xyplot.setRangeGridlinePaint(Color.BLACK);
+		xyplot.setShadowGenerator(new DefaultShadowGenerator());
 		chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 
