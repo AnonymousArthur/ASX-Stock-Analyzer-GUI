@@ -40,7 +40,7 @@ public class ComputeListsenr {
 				Process proc;
 				// Add input file parameter
 				String execCommand = "java -jar " + filepath;
-				if(module == "Awesome-MSM-1.9.jar"){
+				if(module == "Awesome-MSM-1.8.1.jar"){
 					// Add fileName of parameters file
 					execCommand = execCommand + " " + inpuFilePath
 							+ " parameters.txt";
@@ -57,6 +57,20 @@ public class ComputeListsenr {
                     LocalDate sdate1 = arguments_form_module1.startDatePicker.getValue();
                     edate = arguments_form_module1.getedate();
                     LocalDate edate1 = arguments_form_module1.endDatePicker.getValue();
+                    String sdate2 = sdate1.toString();
+					String edate2 = edate1.toString();
+					Date date = null;
+					Date date2 = null;
+					DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+					DateFormat format2 = new SimpleDateFormat("dd-MMM-yyyy");
+					try {
+						date = format.parse(sdate2);
+						date2 = format.parse(edate2);
+					} catch (ParseException e2) {
+  						e2.printStackTrace();
+					}
+					sdate2 = format2.format(date);
+					edate2 = format2.format(date2);	
                     
 					
 					File fileTemp = new File("parameters.txt");
@@ -67,8 +81,8 @@ public class ComputeListsenr {
 							new FileWriter("parameters.txt", true)))) {
 						out.println("window = " + window);
 						out.println("threshold = " + threshold);						
-						out.println("startDate = " + sdate1);
-						out.println("endDate = " + edate1);
+						out.println("startDate = " + sdate2);
+						out.println("endDate = " + edate2);
 						out.println("output = summary.csv");
 					} catch (IOException e1) {
 					}
@@ -92,7 +106,7 @@ public class ComputeListsenr {
                     LocalDate sdate1 = arguments_form_module1.startDatePicker.getValue();
                     edate = arguments_form_module1.getedate();
                     LocalDate edate1 = arguments_form_module1.endDatePicker.getValue();
-					System.out.println(sdate1 + " " + edate1);
+				//	System.out.println(sdate1 + " " + edate1);
 
 					String sdate2 = sdate1.toString();
 					String edate2 = edate1.toString();
@@ -109,7 +123,7 @@ public class ComputeListsenr {
 					sdate2 = format2.format(date);
 					edate2 = format2.format(date2);		
 					
-					System.out.println(sdate2 + " " + edate2);
+				//	System.out.println(sdate2 + " " + edate2);
                   
            
 					File fileTemp = new File("aurora_params.txt");
@@ -177,7 +191,7 @@ public class ComputeListsenr {
 					System.out.println(module);
 					LinkedHashMap<String, ArrayList<TradeRec>> dataHashMap = new LinkedHashMap<String, ArrayList<TradeRec>>();
 					LinkedHashMap<String, ArrayList<Trade>> trades = new LinkedHashMap<String, ArrayList<Trade>>(); 
-					if(module == "Awesome-MSM-1.9.jar"){
+					if(module == "Awesome-MSM-1.8.1.jar"){
 						dataHashMap = CSVParser.CSVParse(inpuFilePath, module);
 						trades = CSVParser.SummaryParse("summary.csv", module);
 					}
