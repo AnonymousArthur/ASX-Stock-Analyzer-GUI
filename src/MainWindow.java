@@ -59,7 +59,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	
 	public MainWindow (){
 		this.setTitle("ALGORITHMIC TRADING");
-		this.setSize(1000, 730);
+		this.setSize(1100, 760);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 		createUI(this.getContentPane());
@@ -171,9 +171,9 @@ public class MainWindow extends JFrame implements ItemListener{
 	    cards.add(card2, MODULE2);
 	    cards.add(card3, MODULE3);
 	    
-	    jtp_module1_companies.setPreferredSize(new Dimension( 740, 580 ));
-	    jtp_module2_companies.setPreferredSize(new Dimension( 740, 580 ));
-	    jtp_module3_companies.setPreferredSize(new Dimension( 740, 580 ));
+	    jtp_module1_companies.setPreferredSize(new Dimension( 1100, 600 ));
+	    jtp_module2_companies.setPreferredSize(new Dimension( 1100, 600 ));
+	    jtp_module3_companies.setPreferredSize(new Dimension( 1100, 600 ));
 	    
 		card1.add(jtp_module1_companies, BorderLayout.CENTER);
 		card2.add(jtp_module2_companies, BorderLayout.CENTER);
