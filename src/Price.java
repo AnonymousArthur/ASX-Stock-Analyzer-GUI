@@ -160,7 +160,7 @@ public class Price implements ChangeListener, ChartProgressListener {
 				long l = (long) d;
 				// System.out.println(1);
 				model.setValueAt(new Long(l), 0, 1);
-				System.out.println(new Date(l));
+				//System.out.println(new Date(l));
 				int i = series.getIndex(new Day(new Date(l)));
 				if (i >= 0) {
 					TimeSeriesDataItem timeseriesdataitem = series
@@ -170,7 +170,7 @@ public class Price implements ChangeListener, ChartProgressListener {
 					long l1 = timeseriesdataitem.getPeriod()
 							.getMiddleMillisecond();
 					double d1 = timeseriesdataitem.getValue().doubleValue();
-					System.out.println(d1);
+					//System.out.println(d1);
 					model.setValueAt(new Long(l1), 0, 1);
 					model.setValueAt(new Double(d1), 0, 2);
 
