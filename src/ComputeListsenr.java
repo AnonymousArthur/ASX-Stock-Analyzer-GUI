@@ -34,7 +34,7 @@ public class ComputeListsenr {
 				Process proc;
 				// Add input file parameter
 				String execCommand = "java -jar " + filepath;
-				if(module == "Awesome-MSM-1.8.1.jar"){
+				if(module == "Awesome-MSM-1.9.jar"){
 					// Add fileName of parameters file
 					execCommand = execCommand + " " + inpuFilePath
 							+ " parameters.txt";
@@ -148,7 +148,7 @@ public class ComputeListsenr {
 					System.out.println(module);
 					LinkedHashMap<String, ArrayList<TradeRec>> dataHashMap = new LinkedHashMap<String, ArrayList<TradeRec>>();
 					LinkedHashMap<String, ArrayList<Trade>> trades = new LinkedHashMap<String, ArrayList<Trade>>(); 
-					if(module == "Awesome-MSM-1.8.1.jar"){
+					if(module == "Awesome-MSM-1.9.jar"){
 						dataHashMap = CSVParser.CSVParse(inpuFilePath, module);
 						trades = CSVParser.SummaryParse("summary.csv", module);
 					}

@@ -101,7 +101,7 @@ public class MainWindow extends JFrame implements ItemListener{
 				}						
 			}		
 		});
-	    compute_listsener_module1 = new ComputeListsenr( arguments_form_module1, jtp_module1_companies, "Awesome-MSM-1.8.1.jar");
+	    compute_listsener_module1 = new ComputeListsenr( arguments_form_module1, jtp_module1_companies, "Awesome-MSM-1.9.jar");
 	    B_Compute.addActionListener(compute_listsener_module1.returnListener());
 	    
 	    
