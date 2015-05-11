@@ -8,9 +8,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -80,17 +86,40 @@ public class ComputeListsenr {
 					window = arguments_form_module1.getWindow();
 					// Add threshold, default value is 0.001 if empty
 					threshold = arguments_form_module1.getThreshold();
-                    sdate = arguments_form_module1.getsdate();
+					
+					
+					sdate = arguments_form_module1.getsdate();
+                    LocalDate sdate1 = arguments_form_module1.startDatePicker.getValue();
                     edate = arguments_form_module1.getedate();
-                    
+                    LocalDate edate1 = arguments_form_module1.endDatePicker.getValue();
+					System.out.println(sdate1 + " " + edate1);
+
+					String sdate2 = sdate1.toString();
+					String edate2 = edate1.toString();
+					Date date = null;
+					Date date2 = null;
+					DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+					DateFormat format2 = new SimpleDateFormat("dd-MMM-yyyy");
+					try {
+						date = format.parse(sdate2);
+						date2 = format.parse(edate2);
+					} catch (ParseException e2) {
+  						e2.printStackTrace();
+					}
+					sdate2 = format2.format(date);
+					edate2 = format2.format(date2);		
+					
+					System.out.println(sdate2 + " " + edate2);
+                  
+           
 					File fileTemp = new File("aurora_params.txt");
 					if (fileTemp.exists()) {
 						fileTemp.delete();
 					}
 					try (PrintWriter out = new PrintWriter(new BufferedWriter(
 							new FileWriter("aurora_params.txt", true)))) {
-						out.println("start_date = " + sdate);
-						out.println("end_date = " + edate);
+						out.println("start_date = " + sdate2);
+						out.println("end_date = " + edate2);
 						out.println("moving_average_window = " + window);
 						out.println("threshold = " + threshold);
 						out.println("output_dir = aurora_output.csv");
