@@ -22,6 +22,7 @@ public class ComputeListsenr {
 	ActionListener listener;
 	static String inpuFilePath;
 	static String fileName;
+	
 
 	// private ArrayList<JTabbedPane> company_tabs = new ArrayList<>();
 
@@ -31,14 +32,16 @@ public class ComputeListsenr {
 
 			public void actionPerformed(ActionEvent e) {
 				Toolkit.getDefaultToolkit().beep();
-
+                String module1 = "Awesome-MSM-2.0.0.jar";
+                String module2 = "aurora.jar";
+                String module3 = "trockAT";
 				// MAKE THIS VARIABLE
 				// Build string to run the jar
 				String filepath = module;
 				Process proc;
 				// Add input file parameter
 				String execCommand = "java -jar " + filepath;
-				if (module == "Awesome-MSM-2.0.0.jar") {
+				if (module == module1) {
 					// Add fileName of parameters file
 					execCommand = execCommand + " " + inpuFilePath
 							+ " parameters.txt";
@@ -92,7 +95,7 @@ public class ComputeListsenr {
 					// System.out.println(execCommand);
 					// Run module
 				}
-				if (module == "aurora.jar") {
+				if (module == module2) {
 					execCommand = execCommand + " " + inpuFilePath
 							+ " aurora_params.txt";
 					int window = 3;
@@ -145,7 +148,7 @@ public class ComputeListsenr {
 					}
 				}
 
-				if (module == "trockAT") {
+				if (module == module3) {
 					execCommand = "./trockAT" + " trock_paramaters.txt";
 					int window = 3;
 					double threshold = 0.001;
@@ -195,10 +198,14 @@ public class ComputeListsenr {
 					System.out.println(module);
 					LinkedHashMap<String, ArrayList<TradeRec>> dataHashMap = new LinkedHashMap<String, ArrayList<TradeRec>>();
 					LinkedHashMap<String, ArrayList<Trade>> trades = new LinkedHashMap<String, ArrayList<Trade>>();
-					if (module == "Awesome-MSM-2.0.0.jar") {
+					
+					
+					
+					
+					if (module == module1) {
 						dataHashMap = CSVParser.CSVParse(inpuFilePath, module);
 						trades = CSVParser.SummaryParse("summary.csv", module);
-					} else if (module == "aurora.jar")
+					} else if (module == module2)
 					// (module == "aurora.jar")
 					{
 						dataHashMap = CSVParser.CSVParse(inpuFilePath, module);
