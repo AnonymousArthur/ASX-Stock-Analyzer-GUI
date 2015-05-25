@@ -160,13 +160,14 @@ public class ComputeListsenr {
 					threshold = arguments_form_module1.getThreshold();
 					sdate = arguments_form_module1.getsdate();
 					edate = arguments_form_module1.getedate();
-
+					sdate = sdate.toUpperCase();
+					edate = sdate.toUpperCase();
 					File fileTemp = new File("trock_paramaters.txt");
 					if (fileTemp.exists()) {
 						fileTemp.delete();
 					}
 					try (PrintWriter out = new PrintWriter(new BufferedWriter(
-							new FileWriter("trock_paramaters.txt", true)))) {
+							new FileWriter("trock_paramaters.param", true)))) {
 						out.println(":input_csvFile:" + inpuFilePath + "\\");
 						out.println(":output_csvFile:trock_output.csv\\");
 						out.println(":output_logFile:TrockAT.log\\");
