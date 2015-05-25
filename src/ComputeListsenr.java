@@ -337,6 +337,10 @@ public class ComputeListsenr {
 		return edate;
 	}
 	
+	public static String getModule(){
+		return inpuFilePath;
+	}
+	
 	public static double round(double value, int places) {
 	    if (places < 0) throw new IllegalArgumentException();
 

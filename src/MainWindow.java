@@ -109,9 +109,11 @@ public class MainWindow extends JFrame implements ItemListener{
 					FilePicker fileChooser = new FilePicker();
 					inpuFilePath = fileChooser.getPath();				
 					filename = fileChooser.getName();
+					System.out.println(inpuFilePath + "|" + filename);
 					//L_input_file_name_card1.setText(fileChooser.getName()+" loaded");
 					compute_listsener_module1.setFileName(filename);
 					compute_listsener_module1.setFilePath(inpuFilePath);
+				    
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}						
@@ -120,17 +122,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	    compute_listsener_module1 = new ComputeListsenr( arguments_form_module1, jtp_module1_companies, "Awesome-MSM-2.0.0.jar");
 	    B_Compute.addActionListener(compute_listsener_module1.returnListener());
 	    
-	    overview.addActionListener(new ActionListener() {
-	    		public void actionPerformed(ActionEvent e) {
-	    			final Overview overview = new Overview(compute_listsener_module1);
-	    			// display the main window in a different thread.
-	    			SwingUtilities.invokeLater(new Runnable() {
-	    	            public void run() {
-	    	            	overview.display();
-	    	            }
-	    	        });
-	    		}
-	    });
+	   
 	    
 	    
 	    /*
@@ -200,6 +192,18 @@ public class MainWindow extends JFrame implements ItemListener{
 	    card3.add(L_input_file_name_card3);
 	    card3.add(D_Compute);
 	    
+	    
+	    overview.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) {
+    			final Overview overview = new Overview(compute_listsener_module1, compute_listsener_module2, compute_listsener_module3 );
+    			// display the main window in a different thread.
+    			SwingUtilities.invokeLater(new Runnable() {
+    	            public void run() {
+    	            	overview.display();
+    	            }
+    	        });
+    		}
+	    });
 	    
 	    
 	    
