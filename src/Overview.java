@@ -11,6 +11,8 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import org.jfree.ui.RefineryUtilities;
+
 public class Overview extends JFrame{
 
 	final static JPanel awesome = new JPanel();
@@ -27,15 +29,16 @@ public class Overview extends JFrame{
 	public Overview(Record module1, Record module2, Record module3){
 		this.setTitle("Overview");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		RefineryUtilities.centerFrameOnScreen(this);
 		this.module1 = module1;
 		this.module2 = module2;
 		this.module3 = module3;
-
+		
 	}
 	
 	void display() {		
 		this.pack();
-		this.setSize(700, 500);
+		this.setSize(920, 500);
         this.setVisible(true);
         awesome.removeAll();
         aurora.removeAll();
@@ -62,11 +65,13 @@ public class Overview extends JFrame{
 		    table_1.getColumn("Record No.").setCellRenderer(render);
 		    table_1.getColumn("Company Name").setCellRenderer(render);
 		    table_1.getColumn("Module Name").setCellRenderer(render);
+		    table_1.getColumn("Window").setCellRenderer(render);
+		    table_1.getColumn("Threshold").setCellRenderer(render);
 		    table_1.getColumn("Data Used").setCellRenderer(render);
 		    table_1.getColumn("Total Return").setCellRenderer(render);
 		    table_1.getColumn("From Date").setCellRenderer(render);
 		    table_1.getColumn("To Date").setCellRenderer(render);
-	        table_1.setPreferredScrollableViewportSize(new Dimension(680,500));
+	        table_1.setPreferredScrollableViewportSize(new Dimension(900,500));
 	        awesome.add(new JScrollPane(table_1),BorderLayout.SOUTH);
         }
 
@@ -91,11 +96,13 @@ public class Overview extends JFrame{
 		    table_2.getColumn("Record No.").setCellRenderer(render);
 		    table_2.getColumn("Company Name").setCellRenderer(render);
 		    table_2.getColumn("Module Name").setCellRenderer(render);
+		    table_2.getColumn("Window").setCellRenderer(render);
+		    table_2.getColumn("Threshold").setCellRenderer(render);
 		    table_2.getColumn("Data Used").setCellRenderer(render);
 		    table_2.getColumn("Total Return").setCellRenderer(render);
 		    table_2.getColumn("From Date").setCellRenderer(render);
 		    table_2.getColumn("To Date").setCellRenderer(render);
-            table_2.setPreferredScrollableViewportSize(new Dimension(680,500));
+            table_2.setPreferredScrollableViewportSize(new Dimension(900,500));
             aurora.add(new JScrollPane(table_2),BorderLayout.SOUTH);
         }
 
@@ -120,11 +127,13 @@ public class Overview extends JFrame{
 		    table_3.getColumn("Record No.").setCellRenderer(render);
 		    table_3.getColumn("Company Name").setCellRenderer(render);
 		    table_3.getColumn("Module Name").setCellRenderer(render);
+		    table_3.getColumn("Window").setCellRenderer(render);
+		    table_3.getColumn("Threshold").setCellRenderer(render);
 		    table_3.getColumn("Data Used").setCellRenderer(render);
 		    table_3.getColumn("Total Return").setCellRenderer(render);
 		    table_3.getColumn("From Date").setCellRenderer(render);
 		    table_3.getColumn("To Date").setCellRenderer(render);
-            table_3.setPreferredScrollableViewportSize(new Dimension(680,500));
+            table_3.setPreferredScrollableViewportSize(new Dimension(900,500));
             trock.add(new JScrollPane(table_3),BorderLayout.SOUTH);
         }
 
