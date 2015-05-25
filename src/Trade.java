@@ -13,10 +13,6 @@ public class Trade {
 	
 	public Trade(String d,double price,double volume,char signal,String module){
 		DateFormat format = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-		if(module == "aurora.jar"){
-			format = new SimpleDateFormat("yyyy-MM-dd",
-					Locale.ENGLISH);
-		}
 		try {
 			this.date = format.parse(d);
 		} catch (ParseException e) {
