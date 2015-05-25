@@ -43,7 +43,7 @@ public class ComputeListsenr {
 	// private ArrayList<JTabbedPane> company_tabs = new ArrayList<>();
 
 	public ComputeListsenr(final Arguments_form arguments_form_module,
-			final JTabbedPane jtp_companies, String module) {
+			final JTabbedPane jtp_companies, String module, Record record) {
 		listener = new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -368,6 +368,15 @@ public class ComputeListsenr {
 						totalReturn = return_.getReturn();
 						totalReturn = totalReturn * 100;
 						totalReturn = round(totalReturn, 2);
+						
+
+						record.set_company(company);
+						record.set_return(totalReturn);
+						record.set_from_date(sdate);
+						record.set_to_date(edate);
+						record.set_file_name(fileName);
+						record.set_module(module);
+						
 						send = send + company + "|" + String.valueOf(totalReturn) + "|";
 						// profit graph
 						Profit profit = new Profit("Profit - " + company,

@@ -57,6 +57,11 @@ public class MainWindow extends JFrame implements ItemListener{
 	final JTabbedPane jtp_module3_companies = new JTabbedPane();
     public static String module;
     public static String filename;
+    
+    private Record module1_rec = new Record();
+    private Record module2_rec = new Record();
+    private Record module3_rec = new Record();
+    
 	
 	//arguments for module2
 	final static JPanel card2 = new JPanel();
@@ -119,7 +124,7 @@ public class MainWindow extends JFrame implements ItemListener{
 				}						
 			}		
 		});
-	    compute_listsener_module1 = new ComputeListsenr( arguments_form_module1, jtp_module1_companies, "Awesome-MSM-2.0.0.jar");
+	    compute_listsener_module1 = new ComputeListsenr( arguments_form_module1, jtp_module1_companies, "Awesome-MSM-2.0.0.jar",module1_rec);
 	    B_Compute.addActionListener(compute_listsener_module1.returnListener());
 	    
 	   
@@ -151,7 +156,7 @@ public class MainWindow extends JFrame implements ItemListener{
 			}		
 		});
 
-	    compute_listsener_module2 = new ComputeListsenr(arguments_form_module2, jtp_module2_companies, "aurora.jar");
+	    compute_listsener_module2 = new ComputeListsenr(arguments_form_module2, jtp_module2_companies, "aurora.jar",module2_rec);
 	    C_Compute.addActionListener(compute_listsener_module2.returnListener());
 	    card2.add(arguments_form_module2.get_Panel());
 	    card2.add(C_Input_Data);
@@ -185,7 +190,7 @@ public class MainWindow extends JFrame implements ItemListener{
 			}		
 		});
 
-	    compute_listsener_module3 = new ComputeListsenr(arguments_form_module3, jtp_module3_companies, "trockAT");
+	    compute_listsener_module3 = new ComputeListsenr(arguments_form_module3, jtp_module3_companies, "trockAT",module3_rec);
 	    D_Compute.addActionListener(compute_listsener_module3.returnListener());
 	    card3.add(arguments_form_module3.get_Panel());
 	    card3.add(D_Input_Data);
@@ -195,7 +200,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	    
 	    overview.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
-    			final Overview overview = new Overview(compute_listsener_module1, compute_listsener_module2, compute_listsener_module3 );
+    			final Overview overview = new Overview(module1_rec, module2_rec, module3_rec);
     			// display the main window in a different thread.
     			SwingUtilities.invokeLater(new Runnable() {
     	            public void run() {
