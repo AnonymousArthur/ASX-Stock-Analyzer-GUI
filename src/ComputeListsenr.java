@@ -114,8 +114,7 @@ public class ComputeListsenr {
 							+ " aurora_params.txt";
 					int window = 3;
 					double threshold = 0.001;
-					String sdate;
-					String edate;
+
 					// Add window, default value is 3 if empty
 					window = arguments_form_module1.getWindow();
 					// Add threshold, default value is 0.001 if empty
@@ -166,8 +165,6 @@ public class ComputeListsenr {
 					execCommand = "./trockAT" + " trock_paramaters.txt";
 					int window = 3;
 					double threshold = 0.001;
-					String sdate;
-					String edate;
 					// Add window, default value is 3 if empty
 					window = arguments_form_module1.getWindow();
 					// Add threshold, default value is 0.001 if empty
@@ -176,7 +173,7 @@ public class ComputeListsenr {
 					edate = arguments_form_module1.getedate();
 					sdate = sdate.toUpperCase();
 					edate = sdate.toUpperCase();
-					File fileTemp = new File("trock_paramaters.txt");
+					File fileTemp = new File("trock_paramaters.param");
 					if (fileTemp.exists()) {
 						fileTemp.delete();
 					}

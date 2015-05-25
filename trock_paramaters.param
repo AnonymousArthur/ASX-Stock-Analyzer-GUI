@@ -1,7 +1,7 @@
-:input_csvFile:/home/mikey/cs3011/BHP.csv\
+:input_csvFile:/Users/Arthur/Documents/Eclipse_workspace/GUI/ANZ.csv\
 :output_csvFile:trock_output.csv\
 :output_logFile:TrockAT.log\
 :returnsInCalculation:3\
-:threshold:0.0\
-:startDate:04-MAY-2011\
-:endDate:04-MAY-2013\
+:threshold:0.001\
+:startDate:\
+:endDate:\
