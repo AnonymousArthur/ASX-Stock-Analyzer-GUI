@@ -42,7 +42,7 @@ public class ComputeListsenr {
 
 	// private ArrayList<JTabbedPane> company_tabs = new ArrayList<>();
 
-	public ComputeListsenr(final Arguments_form arguments_form_module1,
+	public ComputeListsenr(final Arguments_form arguments_form_module,
 			final JTabbedPane jtp_companies, String module) {
 		listener = new ActionListener() {
 
@@ -65,14 +65,14 @@ public class ComputeListsenr {
 					window = 3;
 					threshold = 0.001;
 					// Add window, default value is 3 if empty
-					window = arguments_form_module1.getWindow();
+					window = arguments_form_module.getWindow();
 					// Add threshold, default value is 0.001 if empty
-					threshold = arguments_form_module1.getThreshold();
-					//sdate = arguments_form_module1.getsdate();
-					LocalDate tmpSdate = arguments_form_module1.startDatePicker
+					threshold = arguments_form_module.getThreshold();
+					//sdate = arguments_form_module.getsdate();
+					LocalDate tmpSdate = arguments_form_module.startDatePicker
 							.getValue();
-					//edate = arguments_form_module1.getedate();
-					LocalDate tmpEdate = arguments_form_module1.endDatePicker
+					//edate = arguments_form_module.getedate();
+					LocalDate tmpEdate = arguments_form_module.endDatePicker
 							.getValue();
 					sdate = "01-JAN-1970";
 					edate = "01-JAN-3000";
@@ -116,15 +116,15 @@ public class ComputeListsenr {
 					double threshold = 0.001;
 
 					// Add window, default value is 3 if empty
-					window = arguments_form_module1.getWindow();
+					window = arguments_form_module.getWindow();
 					// Add threshold, default value is 0.001 if empty
-					threshold = arguments_form_module1.getThreshold();
+					threshold = arguments_form_module.getThreshold();
 
-					sdate = arguments_form_module1.getsdate();
-					LocalDate sdate1 = arguments_form_module1.startDatePicker
+					sdate = arguments_form_module.getsdate();
+					LocalDate sdate1 = arguments_form_module.startDatePicker
 							.getValue();
-					edate = arguments_form_module1.getedate();
-					LocalDate edate1 = arguments_form_module1.endDatePicker
+					edate = arguments_form_module.getedate();
+					LocalDate edate1 = arguments_form_module.endDatePicker
 							.getValue();
 					// System.out.println(sdate1 + " " + edate1);
 
@@ -166,11 +166,11 @@ public class ComputeListsenr {
 					int window = 3;
 					double threshold = 0.001;
 					// Add window, default value is 3 if empty
-					window = arguments_form_module1.getWindow();
+					window = arguments_form_module.getWindow();
 					// Add threshold, default value is 0.001 if empty
-					threshold = arguments_form_module1.getThreshold();
-					sdate = arguments_form_module1.getsdate();
-					edate = arguments_form_module1.getedate();
+					threshold = arguments_form_module.getThreshold();
+					sdate = arguments_form_module.getsdate();
+					edate = arguments_form_module.getedate();
 					sdate = sdate.toUpperCase();
 					edate = sdate.toUpperCase();
 					File fileTemp = new File("trock_paramaters.param");
@@ -261,16 +261,16 @@ public class ComputeListsenr {
 
 						Date sDate;
 						Date eDate;
-						if (arguments_form_module1.startDatePicker.getValue() != null
-								&& arguments_form_module1.endDatePicker
+						if (arguments_form_module.startDatePicker.getValue() != null
+								&& arguments_form_module.endDatePicker
 										.getValue() != null) {
 							sDate = Date
-									.from(arguments_form_module1.startDatePicker
+									.from(arguments_form_module.startDatePicker
 											.getValue().atStartOfDay()
 											.atZone(ZoneId.systemDefault())
 											.toInstant());
 							eDate = Date
-									.from(arguments_form_module1.endDatePicker
+									.from(arguments_form_module.endDatePicker
 											.getValue().atStartOfDay()
 											.atZone(ZoneId.systemDefault())
 											.toInstant());
