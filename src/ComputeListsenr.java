@@ -112,6 +112,8 @@ public class ComputeListsenr {
 				if (module == module2) {
 					execCommand = execCommand + " " + inpuFilePath
 							+ " aurora_params.txt";
+					
+					/*
 					int window = 3;
 					double threshold = 0.001;
 
@@ -120,10 +122,10 @@ public class ComputeListsenr {
 					// Add threshold, default value is 0.001 if empty
 					threshold = arguments_form_module.getThreshold();
 
-					sdate = arguments_form_module.getsdate();
+					//sdate = arguments_form_module.getsdate();
 					LocalDate sdate1 = arguments_form_module.startDatePicker
 							.getValue();
-					edate = arguments_form_module.getedate();
+					//edate = arguments_form_module.getedate();
 					LocalDate edate1 = arguments_form_module.endDatePicker
 							.getValue();
 					// System.out.println(sdate1 + " " + edate1);
@@ -143,17 +145,50 @@ public class ComputeListsenr {
 					}
 					sdate2 = format2.format(date);
 					edate2 = format2.format(date2);
-
+					 */
 					// System.out.println(sdate2 + " " + edate2);
 
+					window = 3;
+					threshold = 0.001;
+					// Add window, default value is 3 if empty
+					window = arguments_form_module.getWindow();
+					// Add threshold, default value is 0.001 if empty
+					threshold = arguments_form_module.getThreshold();
+					//sdate = arguments_form_module.getsdate();
+					LocalDate tmpSdate = arguments_form_module.startDatePicker
+							.getValue();
+					//edate = arguments_form_module.getedate();
+					LocalDate tmpEdate = arguments_form_module.endDatePicker
+							.getValue();
+					sdate = "01-JAN-1970";
+					edate = "01-JAN-3000";
+					if (!(tmpSdate == null || tmpEdate == null)) {
+						sdate = tmpSdate.toString();
+						edate = tmpEdate.toString();
+						Date date = null;
+						Date date2 = null;
+						DateFormat format = new SimpleDateFormat("yyyy-MM-dd",
+								Locale.ENGLISH);
+						DateFormat format2 = new SimpleDateFormat("dd-MMM-yyyy");
+						try {
+							date = format.parse(sdate);
+							date2 = format.parse(edate);
+						} catch (ParseException e2) {
+							e2.printStackTrace();
+						}
+						sdate = format2.format(date);
+						edate = format2.format(date2);
+					}
+					
+					
 					File fileTemp = new File("aurora_params.txt");
 					if (fileTemp.exists()) {
 						fileTemp.delete();
 					}
 					try (PrintWriter out = new PrintWriter(new BufferedWriter(
 							new FileWriter("aurora_params.txt", true)))) {
-						out.println("start_date = " + sdate2);
-						out.println("end_date = " + edate2);
+						out.println("start_date = " + sdate);
+						out.println("end_date = " + edate);
 						out.println("moving_average_window = " + window);
 						out.println("threshold = " + threshold);
 						out.println("output_dir = aurora_output.csv");
@@ -169,10 +204,48 @@ public class ComputeListsenr {
 					window = arguments_form_module.getWindow();
 					// Add threshold, default value is 0.001 if empty
 					threshold = arguments_form_module.getThreshold();
+					/*
 					sdate = arguments_form_module.getsdate();
 					edate = arguments_form_module.getedate();
 					sdate = sdate.toUpperCase();
 					edate = sdate.toUpperCase();
+					*/
+					
+					window = 3;
+					threshold = 0.001;
+					// Add window, default value is 3 if empty
+					window = arguments_form_module.getWindow();
+					// Add threshold, default value is 0.001 if empty
+					threshold = arguments_form_module.getThreshold();
+					//sdate = arguments_form_module.getsdate();
+					LocalDate tmpSdate = arguments_form_module.startDatePicker
+							.getValue();
+					//edate = arguments_form_module.getedate();
+					LocalDate tmpEdate = arguments_form_module.endDatePicker
+							.getValue();
+					sdate = "01-JAN-1970";
+					edate = "01-JAN-3000";
+					if (!(tmpSdate == null && tmpEdate == null)) {
+						sdate = tmpSdate.toString();
+						edate = tmpEdate.toString();
+						Date date = null;
+						Date date2 = null;
+						DateFormat format = new SimpleDateFormat("yyyy-MM-dd",
+								Locale.ENGLISH);
+						DateFormat format2 = new SimpleDateFormat("dd-MMM-yyyy");
+						try {
+							date = format.parse(sdate);
+							date2 = format.parse(edate);
+						} catch (ParseException e2) {
+							e2.printStackTrace();
+						}
+						sdate = format2.format(date);
+						edate = format2.format(date2);
+					}
+					
+					sdate = sdate.toUpperCase();
+					edate = sdate.toUpperCase();
+					
 					File fileTemp = new File("trock_paramaters.param");
 					if (fileTemp.exists()) {
 						fileTemp.delete();

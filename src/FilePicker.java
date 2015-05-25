@@ -28,6 +28,14 @@ public class FilePicker {
 								.getName());
 						MainWindow.compute_listsener_module1.setFilePath(file
 								.getPath());
+						MainWindow.compute_listsener_module2.setFileName(file
+								.getName());
+						MainWindow.compute_listsener_module2.setFilePath(file
+								.getPath());
+						MainWindow.compute_listsener_module3.setFileName(file
+								.getName());
+						MainWindow.compute_listsener_module3.setFilePath(file
+								.getPath());
 					}
 				}
 			}

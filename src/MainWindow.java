@@ -49,9 +49,9 @@ public class MainWindow extends JFrame implements ItemListener{
 	private Arguments_form arguments_form_module1;
 	private Arguments_form arguments_form_module2;
 	private Arguments_form arguments_form_module3;
-	private ComputeListsenr compute_listsener_module2;
-	private ComputeListsenr compute_listsener_module3;
 	public static ComputeListsenr compute_listsener_module1;
+	public static ComputeListsenr compute_listsener_module2;
+	public static ComputeListsenr compute_listsener_module3;
 	final JTabbedPane jtp_module1_companies = new JTabbedPane();
 	final JTabbedPane jtp_module2_companies = new JTabbedPane();
 	final JTabbedPane jtp_module3_companies = new JTabbedPane();
