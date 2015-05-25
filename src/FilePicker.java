@@ -18,7 +18,11 @@ public class FilePicker {
 				File file = fileChooser.showOpenDialog(new Stage());
 				if (file != null) {					
 					if (file != null) {
-						MainWindow.L_input_file_name.setText(file.getName()
+						MainWindow.L_input_file_name_card1.setText(file.getName()
+								+ " loaded");
+						MainWindow.L_input_file_name_card2.setText(file.getName()
+								+ " loaded");
+						MainWindow.L_input_file_name_card3.setText(file.getName()
 								+ " loaded");
 						MainWindow.compute_listsener_module1.setFileName(file
 								.getName());

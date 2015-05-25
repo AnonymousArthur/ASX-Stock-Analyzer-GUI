@@ -1,3 +1,6 @@
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,13 +19,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Locale;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.SpringLayout;
+
+import org.jfree.data.xy.WindDataset;
 
 public class ComputeListsenr {
 	ActionListener listener;
 	static String inpuFilePath;
 	static String fileName;
-	
+	static int window;
+	static double threshold;
+	static String sdate;
+	static String edate;
 
 	// private ArrayList<JTabbedPane> company_tabs = new ArrayList<>();
 
@@ -46,38 +58,36 @@ public class ComputeListsenr {
 					execCommand = execCommand + " " + inpuFilePath
 							+ " parameters.txt";
 					// Create parameters.txt file
-					int window = 3;
-					double threshold = 0.001;
-					String sdate;
-					String edate;
+					window = 3;
+					threshold = 0.001;
 					// Add window, default value is 3 if empty
 					window = arguments_form_module1.getWindow();
 					// Add threshold, default value is 0.001 if empty
 					threshold = arguments_form_module1.getThreshold();
-					sdate = arguments_form_module1.getsdate();
-					LocalDate sdate1 = arguments_form_module1.startDatePicker
+					//sdate = arguments_form_module1.getsdate();
+					LocalDate tmpSdate = arguments_form_module1.startDatePicker
 							.getValue();
-					edate = arguments_form_module1.getedate();
-					LocalDate edate1 = arguments_form_module1.endDatePicker
+					//edate = arguments_form_module1.getedate();
+					LocalDate tmpEdate = arguments_form_module1.endDatePicker
 							.getValue();
-					String sdate2 = "01-JAN-2000";
-					String edate2 = "01-JAN-2016";
-					if (!(sdate1 == null || edate1 == null)) {
-						sdate2 = sdate1.toString();
-						edate2 = edate1.toString();
+					sdate = "01-JAN-1970";
+					edate = "01-JAN-3000";
+					if (!(tmpSdate == null || tmpEdate == null)) {
+						sdate = tmpSdate.toString();
+						edate = tmpEdate.toString();
 						Date date = null;
 						Date date2 = null;
 						DateFormat format = new SimpleDateFormat("yyyy-MM-dd",
 								Locale.ENGLISH);
 						DateFormat format2 = new SimpleDateFormat("dd-MMM-yyyy");
 						try {
-							date = format.parse(sdate2);
-							date2 = format.parse(edate2);
+							date = format.parse(sdate);
+							date2 = format.parse(edate);
 						} catch (ParseException e2) {
 							e2.printStackTrace();
 						}
-						sdate2 = format2.format(date);
-						edate2 = format2.format(date2);
+						sdate = format2.format(date);
+						edate = format2.format(date2);
 					}
 					File fileTemp = new File("parameters.txt");
 					if (fileTemp.exists()) {
@@ -87,8 +97,8 @@ public class ComputeListsenr {
 							new FileWriter("parameters.txt", true)))) {
 						out.println("window = " + window);
 						out.println("threshold = " + threshold);
-						out.println("startDate = " + sdate2);
-						out.println("endDate = " + edate2);
+						out.println("startDate = " + sdate);
+						out.println("endDate = " + edate);
 						out.println("output = summary.csv");
 					} catch (IOException e1) {
 					}
@@ -200,14 +210,10 @@ public class ComputeListsenr {
 					LinkedHashMap<String, ArrayList<TradeRec>> dataHashMap = new LinkedHashMap<String, ArrayList<TradeRec>>();
 					LinkedHashMap<String, ArrayList<Trade>> trades = new LinkedHashMap<String, ArrayList<Trade>>();
 					
-					
-					
-					
 					if (module == module1) {
 						dataHashMap = CSVParser.CSVParse(inpuFilePath, module);
 						trades = CSVParser.SummaryParse("summary.csv", module);
 					} else if (module == module2)
-					// (module == "aurora.jar")
 					{
 						dataHashMap = CSVParser.CSVParse(inpuFilePath, module);
 						trades = CSVParser.SummaryParse("aurora_output.csv",
@@ -218,18 +224,36 @@ public class ComputeListsenr {
 								module);
 
 					}
-					/*
-					 * for(String company: dataHashMap.keySet()){ JTabbedPane
-					 * company_tab = new JTabbedPane();
-					 * company_tabs.add(company_tab);
-					 * //jtp_companies.add(company + " from " +
-					 * fileName,company_tab); }
-					 */
 
 					for (String company : dataHashMap.keySet()) {
 						JTabbedPane company_tab = new JTabbedPane();
+						
+						JPanel infoPanel = new JPanel(new BorderLayout());
+						JPanel parameterPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+						parameterPanel.setPreferredSize(new Dimension(1100,20));
+						infoPanel.setPreferredSize(new Dimension(1100,450));
+						
+						//jtp_companies.add(company + " from " + fileName,
+						//		company_tab);
+						JLabel windowLabel = new JLabel("Window = "+window);
+						JLabel thresholdLabel = new JLabel("Threshold = "+threshold);
+						JLabel startDateLabel = new JLabel("Start Date: "+sdate);
+						JLabel endDateLabel = new JLabel("End Date: "+edate);
+						
+						parameterPanel.add(windowLabel);
+						parameterPanel.add(thresholdLabel);
+						
+						if(!sdate.equals("01-JAN-1970"))
+							parameterPanel.add(startDateLabel);
+						
+						if(!edate.equals("01-JAN-3000"))
+							parameterPanel.add(endDateLabel);
+						
+						infoPanel.add(parameterPanel,BorderLayout.NORTH);
+						infoPanel.add(company_tab,BorderLayout.CENTER);
+						
 						jtp_companies.add(company + " from " + fileName,
-								company_tab);
+							infoPanel);
 						// price graph
 
 						Date sDate;

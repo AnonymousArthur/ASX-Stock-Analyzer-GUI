@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -38,7 +39,10 @@ public class MainWindow extends JFrame implements ItemListener{
     final static String MODULE1 = "Awesome MSM";
     final static String MODULE2 = "Aurora";
     final static String MODULE3 = "Trock";
-    final static JLabel L_input_file_name = new JLabel();
+    final static JLabel L_input_file_name_card1 = new JLabel();
+    final static JLabel L_input_file_name_card2 = new JLabel();
+    final static JLabel L_input_file_name_card3 = new JLabel();
+    
 	//arguments for module1
 	final static JPanel card1 = new JPanel();
 	private Arguments_form arguments_form_module1;
@@ -60,6 +64,8 @@ public class MainWindow extends JFrame implements ItemListener{
 	public MainWindow (){
 		this.setTitle("ALGORITHMIC TRADING");
 		this.setSize(1100, 760);
+		this.setResizable(false);
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 		createUI(this.getContentPane());
@@ -79,15 +85,19 @@ public class MainWindow extends JFrame implements ItemListener{
 	    
 	    JButton B_Input_Data = new JButton("Input Data");
 	    JButton B_Compute = new JButton("Compute");
+	    /*
 	    
+	    Awesome
+	    
+	    */
 
 	    arguments_form_module1 = new Arguments_form(card1);
 	    
 	    //JLabel L_input_file_name = new JLabel();
-	    L_input_file_name.setText("Select file");
+	    L_input_file_name_card1.setText("Select file");
 	    card1.add(arguments_form_module1.get_Panel());
 	    card1.add(B_Input_Data);
-	    card1.add(L_input_file_name);
+	    card1.add(L_input_file_name_card1);
 	    card1.add(B_Compute);
 	    
 	    B_Input_Data.addActionListener(new ActionListener() {
@@ -95,7 +105,10 @@ public class MainWindow extends JFrame implements ItemListener{
 				try {
 					FilePicker fileChooser = new FilePicker();
 					inpuFilePath = fileChooser.getPath();				
-					
+					filename = fileChooser.getName();
+					//L_input_file_name_card1.setText(fileChooser.getName()+" loaded");
+					compute_listsener_module1.setFileName(filename);
+					compute_listsener_module1.setFilePath(inpuFilePath);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}						
@@ -106,8 +119,13 @@ public class MainWindow extends JFrame implements ItemListener{
 	    
 	    
 	    
-	   
+	    /*
+	    
+	    Aurora
+	    
+	    */
 	    JPanel card2 = new JPanel();
+	    L_input_file_name_card2.setText("Select file");
 	    arguments_form_module2 = new Arguments_form(card2);
 	    JButton C_Input_Data = new JButton("Input CSV");
 	    JButton C_Compute = new JButton("Compute");
@@ -118,7 +136,7 @@ public class MainWindow extends JFrame implements ItemListener{
 					FilePicker fileChooser = new FilePicker();
 					inpuFilePath = fileChooser.getPath();
 					filename = fileChooser.getName();
-					L_input_file_name.setText(fileChooser.getName()+" loaded");
+					//L_input_file_name_card2.setText(fileChooser.getName()+" loaded");
 					compute_listsener_module2.setFileName(filename);
 					compute_listsener_module2.setFilePath(inpuFilePath);
 				} catch (IOException e1) {
@@ -131,11 +149,17 @@ public class MainWindow extends JFrame implements ItemListener{
 	    C_Compute.addActionListener(compute_listsener_module2.returnListener());
 	    card2.add(arguments_form_module2.get_Panel());
 	    card2.add(C_Input_Data);
-	    card2.add(L_input_file_name);
+	    card2.add(L_input_file_name_card2);
 	    card2.add(C_Compute);
 	    
+	    /*
+	    
+	   	Trock
+	    
+	    */
 	    
 	    JPanel card3 = new JPanel();
+	    L_input_file_name_card3.setText("Select file");
 	    arguments_form_module3 = new Arguments_form(card3);
 	    JButton D_Input_Data = new JButton("Input CSV");
 	    JButton D_Compute = new JButton("Compute");
@@ -146,7 +170,7 @@ public class MainWindow extends JFrame implements ItemListener{
 					FilePicker fileChooser = new FilePicker();
 					inpuFilePath = fileChooser.getPath();
 					filename = fileChooser.getName();
-					L_input_file_name.setText(fileChooser.getName()+" loaded");
+					//L_input_file_name_card3.setText(fileChooser.getName()+" loaded");
 					compute_listsener_module3.setFileName(filename);
 					compute_listsener_module3.setFilePath(inpuFilePath);
 				} catch (IOException e1) {
@@ -159,7 +183,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	    D_Compute.addActionListener(compute_listsener_module3.returnListener());
 	    card3.add(arguments_form_module3.get_Panel());
 	    card3.add(D_Input_Data);
-	    card3.add(L_input_file_name);
+	    card3.add(L_input_file_name_card3);
 	    card3.add(D_Compute);
 	    
 	    

@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -17,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
+import javax.swing.UIManager;
 
 
 public class Arguments_form {
@@ -104,6 +106,13 @@ public class Arguments_form {
         gridPane.add(endDatePicker, 2, 1);
 
         vbox.getChildren().add(gridPane);
+        //gridPane.setStyle("-fx-background-color: #C0C0C0;");
+        //scene.setFill(#C0C0C0);
+        Color bgColor = UIManager.getColor("Panel.background");
+        String hexColor = "#"+Integer.toHexString(bgColor.getRGB() & 0xffffff);
+        vbox.setStyle("-fx-background-color: "+ hexColor +";");
+        gridPane.setBackground(null);
+        fxPanel.setBackground(null);
         fxPanel.setScene(scene);
 	    
 	    //Create and populate the panel.
@@ -117,18 +126,8 @@ public class Arguments_form {
 	    p.add(threshold_label);
 	    threshold_label.setLabelFor(threshold_field);
 	    p.add(threshold_field);
-	   /**
-	    JLabel startdate_label = new JLabel("StartDate: ", JLabel.TRAILING);
-	    p.add(startdate_label);
-	    threshold_label.setLabelFor(startdate_field);
-	    p.add(startdate_field);
 
-	    JLabel enddate_label = new JLabel("EndDate: ", JLabel.TRAILING);
-	    p.add(enddate_label);
-	    threshold_label.setLabelFor(enddate_field);
-	    p.add(enddate_field);
-	    */
-	    	    card.add(fxPanel);
+	    card.add(fxPanel);
 	 	    //Lay out the panel.
 	    SpringUtilities.makeCompactGrid(p,
 	                                   numPairs, 4, //rows, cols
