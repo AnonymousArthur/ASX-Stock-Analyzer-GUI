@@ -1,22 +1,12 @@
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-
-import javafx.stage.Stage;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,11 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
 
-import org.jfree.ui.RefineryUtilities;
 
 public class MainWindow extends JFrame implements ItemListener{
     /**
@@ -67,6 +54,8 @@ public class MainWindow extends JFrame implements ItemListener{
 	final static JPanel card2 = new JPanel();
 	final static JPanel card3 = new JPanel();
 	
+	public static Overview overview;
+	
 	public MainWindow (){
 		this.setTitle("ALGORITHMIC TRADING");
 		this.setSize(1100, 760);
@@ -89,9 +78,9 @@ public class MainWindow extends JFrame implements ItemListener{
 	     
 	    //Create the "cards".
 	    
-	    JButton B_Input_Data = new JButton("Input Data");
+	    JButton B_Input_Data = new JButton("Input CSV");
 	    JButton B_Compute = new JButton("Compute");
-	    JButton overview = new JButton("Overview");
+	    JButton B_overview = new JButton("Overview");
 	    /*
 	    
 	    Awesome
@@ -106,7 +95,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	    card1.add(B_Input_Data);
 	    card1.add(L_input_file_name_card1);
 	    card1.add(B_Compute);
-	    card1.add(overview);
+	    card1.add(B_overview);
 	    
 	    B_Input_Data.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -114,7 +103,7 @@ public class MainWindow extends JFrame implements ItemListener{
 					FilePicker fileChooser = new FilePicker();
 					inpuFilePath = fileChooser.getPath();				
 					filename = fileChooser.getName();
-					System.out.println(inpuFilePath + "|" + filename);
+					//System.out.println(inpuFilePath + "|" + filename);
 					//L_input_file_name_card1.setText(fileChooser.getName()+" loaded");
 					compute_listsener_module1.setFileName(filename);
 					compute_listsener_module1.setFilePath(inpuFilePath);
@@ -140,6 +129,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	    arguments_form_module2 = new Arguments_form(card2);
 	    JButton C_Input_Data = new JButton("Input CSV");
 	    JButton C_Compute = new JButton("Compute");
+	    JButton C_overview = new JButton("Overview");
 	    
 	    C_Input_Data.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -162,6 +152,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	    card2.add(C_Input_Data);
 	    card2.add(L_input_file_name_card2);
 	    card2.add(C_Compute);
+	    card2.add(C_overview);
 	    
 	    /*
 	    
@@ -174,6 +165,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	    arguments_form_module3 = new Arguments_form(card3);
 	    JButton D_Input_Data = new JButton("Input CSV");
 	    JButton D_Compute = new JButton("Compute");
+	    JButton D_overview = new JButton("Overview");
 	    
 	    D_Input_Data.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -196,11 +188,11 @@ public class MainWindow extends JFrame implements ItemListener{
 	    card3.add(D_Input_Data);
 	    card3.add(L_input_file_name_card3);
 	    card3.add(D_Compute);
+	    card3.add(D_overview);
 	    
-	    
-	    overview.addActionListener(new ActionListener() {
+	    B_overview.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
-    			final Overview overview = new Overview(module1_rec, module2_rec, module3_rec);
+    			overview = new Overview(module1_rec, module2_rec, module3_rec);
     			// display the main window in a different thread.
     			SwingUtilities.invokeLater(new Runnable() {
     	            public void run() {
@@ -211,7 +203,31 @@ public class MainWindow extends JFrame implements ItemListener{
 	    });
 	    
 	    
+	    C_overview.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) {
+    			overview = new Overview(module1_rec, module2_rec, module3_rec);
+    			// display the main window in a different thread.
+    			SwingUtilities.invokeLater(new Runnable() {
+    	            public void run() {
+    	            	overview.display();
+    	            }
+    	        });
+    		}
+	    });
 	    
+	    D_overview.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) {
+    			overview = new Overview(module1_rec, module2_rec, module3_rec);
+    			// display the main window in a different thread.
+    			SwingUtilities.invokeLater(new Runnable() {
+    	            public void run() {
+    	            	overview.display();
+    	            }
+    	        });
+    		}
+	    });
+	    
+
 	    //Create the panel that contains the "cards".
 	    cards = new JPanel(new CardLayout());
 	    cards.add(card1, MODULE1);

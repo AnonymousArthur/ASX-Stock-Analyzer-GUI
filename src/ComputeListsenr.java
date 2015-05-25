@@ -25,9 +25,6 @@ import java.util.Locale;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.SpringLayout;
-
-import org.jfree.data.xy.WindDataset;
 
 public class ComputeListsenr {
 	ActionListener listener;
@@ -112,42 +109,6 @@ public class ComputeListsenr {
 				if (module == module2) {
 					execCommand = execCommand + " " + inpuFilePath
 							+ " aurora_params.txt";
-					
-					/*
-					int window = 3;
-					double threshold = 0.001;
-
-					// Add window, default value is 3 if empty
-					window = arguments_form_module.getWindow();
-					// Add threshold, default value is 0.001 if empty
-					threshold = arguments_form_module.getThreshold();
-
-					//sdate = arguments_form_module.getsdate();
-					LocalDate sdate1 = arguments_form_module.startDatePicker
-							.getValue();
-					//edate = arguments_form_module.getedate();
-					LocalDate edate1 = arguments_form_module.endDatePicker
-							.getValue();
-					// System.out.println(sdate1 + " " + edate1);
-
-					String sdate2 = sdate1.toString();
-					String edate2 = edate1.toString();
-					Date date = null;
-					Date date2 = null;
-					DateFormat format = new SimpleDateFormat("yyyy-MM-dd",
-							Locale.ENGLISH);
-					DateFormat format2 = new SimpleDateFormat("dd-MMM-yyyy");
-					try {
-						date = format.parse(sdate2);
-						date2 = format.parse(edate2);
-					} catch (ParseException e2) {
-						e2.printStackTrace();
-					}
-					sdate2 = format2.format(date);
-					edate2 = format2.format(date2);
-					 */
-					// System.out.println(sdate2 + " " + edate2);
-
 					window = 3;
 					threshold = 0.001;
 					// Add window, default value is 3 if empty
@@ -197,33 +158,24 @@ public class ComputeListsenr {
 				}
 
 				if (module == module3) {
-					execCommand = "./trockAT" + " trock_paramaters.param";					
-					// Add window, default value is 3 if empty
-					window = arguments_form_module.getWindow();
-					// Add threshold, default value is 0.001 if empty
-					threshold = arguments_form_module.getThreshold();
-					/*
-					sdate = arguments_form_module.getsdate();
-					edate = arguments_form_module.getedate();
-					sdate = sdate.toUpperCase();
-					edate = sdate.toUpperCase();
-					*/					
+					execCommand = "./trockAT" + " trock_paramaters.param";	
 					window = 3;
 					threshold = 0.001;
 					// Add window, default value is 3 if empty
 					window = arguments_form_module.getWindow();
-					System.out.println(window);
 					// Add threshold, default value is 0.001 if empty
 					threshold = arguments_form_module.getThreshold();
-					System.out.println(threshold);
+					
+					// Add window, default value is 3 if empty
+					window = arguments_form_module.getWindow();				
+					// Add threshold, default value is 0.001 if empty
+					threshold = arguments_form_module.getThreshold();		
 					//sdate = arguments_form_module.getsdate();
 					LocalDate tmpSdate = arguments_form_module.startDatePicker
 							.getValue();
-					System.out.println(tmpSdate);
 					//edate = arguments_form_module.getedate();
 					LocalDate tmpEdate = arguments_form_module.endDatePicker
 							.getValue();
-					System.out.println(tmpEdate);
 					sdate = "01-JAN-1970";
 					edate = "01-JAN-3000";
 					if (!(tmpSdate == null && tmpEdate == null)) {
@@ -243,13 +195,8 @@ public class ComputeListsenr {
 						sdate = format2.format(date);
 						edate = format2.format(date2);
 					}
-					
 					sdate = sdate.toUpperCase();
 					edate = edate.toUpperCase();
-					
-					System.out.println(sdate);
-					System.out.println(edate);
-					
 					File fileTemp = new File("trock_paramaters.param");
 					if (fileTemp.exists()) {
 						fileTemp.delete();

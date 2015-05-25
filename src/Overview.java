@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
@@ -7,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class Overview extends JFrame{
 
@@ -46,31 +49,49 @@ public class Overview extends JFrame{
 	        	T_data_1[i][1] = module1.get_companys().get(i);
 	        	T_data_1[i][2] = module1.get_modules().get(i);
 	        	T_data_1[i][3] = module1.get_file_names().get(i);
-	        	T_data_1[i][4] = module1.get_returns().get(i);
+	        	T_data_1[i][4] = module1.get_returns().get(i)+"%";
 	        	T_data_1[i][5] = module1.get_from_dates().get(i);
 	        	T_data_1[i][6] = module1.get_to_dates().get(i);
 	        }
 
 	        JTable table_1 = new JTable(T_data_1 , columnTitle);
-	        
+	        DefaultTableCellRenderer render = new DefaultTableCellRenderer();
+		    render.setHorizontalAlignment(SwingConstants.CENTER);
+		    table_1.getColumn("Record No.").setCellRenderer(render);
+		    table_1.getColumn("Company Name").setCellRenderer(render);
+		    table_1.getColumn("Module Name").setCellRenderer(render);
+		    table_1.getColumn("Data Used").setCellRenderer(render);
+		    table_1.getColumn("Total Return").setCellRenderer(render);
+		    table_1.getColumn("From Date").setCellRenderer(render);
+		    table_1.getColumn("To Date").setCellRenderer(render);
+	        table_1.setPreferredScrollableViewportSize(new Dimension(680,500));
 	        awesome.add(new JScrollPane(table_1),BorderLayout.SOUTH);
         }
 
         
         if(module2.get_companys().size() != 0){
 	        Object[][] T_data_2 = new Object[module2.get_companys().size()][7];
-	        System.out.println(module2.get_companys().size());
-	        for(int i = 0; i<module1.get_companys().size();i++){
+	        //System.out.println(module2.get_companys().size());
+	        for(int i = 0; i<module2.get_companys().size();i++){
 	        	T_data_2[i][0] = i;
 	        	T_data_2[i][1] = module2.get_companys().get(i);
 	        	T_data_2[i][2] = module2.get_modules().get(i);
 	        	T_data_2[i][3] = module2.get_file_names().get(i);
-	        	T_data_2[i][4] = module2.get_returns().get(i);
+	        	T_data_2[i][4] = module2.get_returns().get(i)+"%";
 	        	T_data_2[i][5] = module2.get_from_dates().get(i);
 	        	T_data_2[i][6] = module2.get_to_dates().get(i);
 	        }
             JTable table_2 = new JTable(T_data_2 , columnTitle);
-            
+            DefaultTableCellRenderer render = new DefaultTableCellRenderer();
+    	    render.setHorizontalAlignment(SwingConstants.CENTER);
+		    table_2.getColumn("Record No.").setCellRenderer(render);
+		    table_2.getColumn("Company Name").setCellRenderer(render);
+		    table_2.getColumn("Module Name").setCellRenderer(render);
+		    table_2.getColumn("Data Used").setCellRenderer(render);
+		    table_2.getColumn("Total Return").setCellRenderer(render);
+		    table_2.getColumn("From Date").setCellRenderer(render);
+		    table_2.getColumn("To Date").setCellRenderer(render);
+            table_2.setPreferredScrollableViewportSize(new Dimension(680,500));
             aurora.add(new JScrollPane(table_2),BorderLayout.SOUTH);
         }
 
@@ -78,61 +99,29 @@ public class Overview extends JFrame{
         
         if(module3.get_companys().size() != 0){
 	        Object[][] T_data_3 = new Object[module3.get_companys().size()][7];
-	        for(int i = 0; i<module1.get_companys().size();i++){
+	        for(int i = 0; i<module3.get_companys().size();i++){
 	        	T_data_3[i][0] = i;
 	        	T_data_3[i][1] = module3.get_companys().get(i);
 	        	T_data_3[i][2] = module3.get_modules().get(i);
 	        	T_data_3[i][3] = module3.get_file_names().get(i);
-	        	T_data_3[i][4] = module3.get_returns().get(i);
+	        	T_data_3[i][4] = module3.get_returns().get(i)+"%";
 	        	T_data_3[i][5] = module3.get_from_dates().get(i);
 	        	T_data_3[i][6] = module3.get_to_dates().get(i);
 	        }
             JTable table_3 = new JTable(T_data_3 , columnTitle);
+            DefaultTableCellRenderer render = new DefaultTableCellRenderer();
+    	    render.setHorizontalAlignment(SwingConstants.CENTER);
+		    table_3.getColumn("Record No.").setCellRenderer(render);
+		    table_3.getColumn("Company Name").setCellRenderer(render);
+		    table_3.getColumn("Module Name").setCellRenderer(render);
+		    table_3.getColumn("Data Used").setCellRenderer(render);
+		    table_3.getColumn("Total Return").setCellRenderer(render);
+		    table_3.getColumn("From Date").setCellRenderer(render);
+		    table_3.getColumn("To Date").setCellRenderer(render);
+            table_3.setPreferredScrollableViewportSize(new Dimension(680,500));
             trock.add(new JScrollPane(table_3),BorderLayout.SOUTH);
         }
 
-        
-        
-        /*
-        String send = module1.getData();
-        String sdate = ComputeListsenr.getsDate();
-        String edate = ComputeListsenr.geteDate();
-        
-        awesome.setLayout(layout1);
-        String parts[] = send.split("\\|");
-        label = new JLabel("Date: " + sdate + " - " + edate);
-        System.out.println(send);
-        awesome.add(new JLabel(module1.getModule()));
-        awesome.add(label);
-        for(int i = 0; i < parts.length; i = i + 2){
-        	awesome.add(new JLabel("Company: " + parts[i]));
-        	awesome.add(new JLabel("Return: " + parts[i + 1] + "%"));
-        }
-        
-        send = module2.getData();
-        aurora.setLayout(layout1);
-        String parts2[] = send.split("\\|");
-        label = new JLabel("Date: " + sdate + " - " + edate);
-        System.out.println(send);
-        aurora.add(new JLabel(module2.getModule()));
-        aurora.add(label);
-        for(int i = 0; i < parts2.length; i = i + 2){
-        	aurora.add(new JLabel("Company: " + parts[i]));
-        	aurora.add(new JLabel("Return: " + parts[i + 1] + "%"));
-        }
-        
-        send = module3.getData();
-        trock.setLayout(layout1);
-        String parts3[] = send.split("\\|");
-        label = new JLabel("Date: " + sdate + " - " + edate);
-        System.out.println(send);
-        trock.add(new JLabel(module3.getModule()));
-        trock.add(label);
-        for(int i = 0; i < parts3.length; i = i + 2){
-        	trock.add(new JLabel("Company: " + parts[i]));
-        	trock.add(new JLabel("Return: " + parts[i + 1] + "%"));
-        }
-        */
         tabs.addTab("Awesome", awesome);
         tabs.addTab("Aurora", aurora);
         tabs.addTab("Trock", trock);
