@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,6 +37,8 @@ public class ComputeListsenr {
 	static double threshold;
 	static String sdate;
 	static String edate;
+	static double totalReturn;
+	static String send = "";
 
 	// private ArrayList<JTabbedPane> company_tabs = new ArrayList<>();
 
@@ -226,6 +230,8 @@ public class ComputeListsenr {
 					}
 
 					for (String company : dataHashMap.keySet()) {
+						
+
 						JTabbedPane company_tab = new JTabbedPane();
 						
 						JPanel infoPanel = new JPanel(new BorderLayout());
@@ -285,6 +291,10 @@ public class ComputeListsenr {
 								"Return over Time", trades.get(company),
 								company);
 						company_tab.add("Return", return_.get_chartPanel());
+						totalReturn = return_.getReturn();
+						totalReturn = totalReturn * 100;
+						totalReturn = round(totalReturn, 2);
+						send = send + company + "|" + String.valueOf(totalReturn) + "|";
 						// profit graph
 						Profit profit = new Profit("Profit - " + company,
 								"Profit over Time", trades.get(company),
@@ -315,5 +325,23 @@ public class ComputeListsenr {
 	public void setFilePath(String fileP) {
 		this.inpuFilePath = fileP;
 	}
+	
+	public static String getData(){
+		return send;
+	}
+	
+	public static String getsDate(){
+		return sdate;
+	}
+	public static String geteDate(){
+		return edate;
+	}
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
 
+	    BigDecimal bd = new BigDecimal(value);
+	    bd = bd.setScale(places, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
+	}
 }

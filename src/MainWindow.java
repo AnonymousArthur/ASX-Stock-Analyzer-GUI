@@ -26,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
+import javax.swing.SwingUtilities;
 
 import org.jfree.ui.RefineryUtilities;
 
@@ -85,6 +86,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	    
 	    JButton B_Input_Data = new JButton("Input Data");
 	    JButton B_Compute = new JButton("Compute");
+	    JButton overview = new JButton("Overview");
 	    /*
 	    
 	    Awesome
@@ -99,6 +101,7 @@ public class MainWindow extends JFrame implements ItemListener{
 	    card1.add(B_Input_Data);
 	    card1.add(L_input_file_name_card1);
 	    card1.add(B_Compute);
+	    card1.add(overview);
 	    
 	    B_Input_Data.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -117,6 +120,17 @@ public class MainWindow extends JFrame implements ItemListener{
 	    compute_listsener_module1 = new ComputeListsenr( arguments_form_module1, jtp_module1_companies, "Awesome-MSM-2.0.0.jar");
 	    B_Compute.addActionListener(compute_listsener_module1.returnListener());
 	    
+	    overview.addActionListener(new ActionListener() {
+	    		public void actionPerformed(ActionEvent e) {
+	    			final Overview overview = new Overview(compute_listsener_module1);
+	    			// display the main window in a different thread.
+	    			SwingUtilities.invokeLater(new Runnable() {
+	    	            public void run() {
+	    	            	overview.display();
+	    	            }
+	    	        });
+	    		}
+	    });
 	    
 	    
 	    /*

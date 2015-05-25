@@ -96,5 +96,9 @@ public class Return {
 	public ChartPanel get_chartPanel() {
 		return chartPanel;
 	}
+	
+	public double getReturn(){
+		return totalReturn;
+	}
 
 }
