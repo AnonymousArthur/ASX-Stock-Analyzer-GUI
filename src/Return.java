@@ -43,7 +43,7 @@ public class Return {
 			ArrayList<Trade> trades, String company) {
 		this.trades = trades;
 		this.company = company;
-		T_data = new Object[trades.size()/2][column_num];
+		T_data = new Object[trades.size()/2 + 2][column_num];
 		
 		JFreeChart jfreechart = ChartFactory.createScatterPlot(
 				"Return over Transaction pairs","Pair No." , "Return", createDataset(),

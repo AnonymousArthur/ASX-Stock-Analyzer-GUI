@@ -41,17 +41,19 @@ public class Overview extends JFrame{
         aurora.removeAll();
         trock.removeAll();
         
-        Object[] columnTitle = {"Record No.", "Company Name" ,"Module Name", "Data Used", "Total Return", "From Date" ,"To Date"};
-        Object[][] T_data_1 = new Object[module1.get_companys().size()][7];
+        Object[] columnTitle = {"Record No.", "Company Name" ,"Module Name", "Window","Threshold","Data Used", "Total Return", "From Date" ,"To Date"};
+        Object[][] T_data_1 = new Object[module1.get_companys().size()][9];
         if(module1.get_companys().size() != 0){
 	        for(int i = 0; i<module1.get_companys().size();i++){
 	        	T_data_1[i][0] = i;
 	        	T_data_1[i][1] = module1.get_companys().get(i);
 	        	T_data_1[i][2] = module1.get_modules().get(i);
-	        	T_data_1[i][3] = module1.get_file_names().get(i);
-	        	T_data_1[i][4] = module1.get_returns().get(i)+"%";
-	        	T_data_1[i][5] = module1.get_from_dates().get(i);
-	        	T_data_1[i][6] = module1.get_to_dates().get(i);
+	        	T_data_1[i][3] = module1.get_windows().get(i);
+	        	T_data_1[i][4] = module1.get_thresholds().get(i);
+	        	T_data_1[i][5] = module1.get_file_names().get(i);
+	        	T_data_1[i][6] = module1.get_returns().get(i)+"%";
+	        	T_data_1[i][7] = module1.get_from_dates().get(i);
+	        	T_data_1[i][8] = module1.get_to_dates().get(i);
 	        }
 
 	        JTable table_1 = new JTable(T_data_1 , columnTitle);
@@ -70,16 +72,18 @@ public class Overview extends JFrame{
 
         
         if(module2.get_companys().size() != 0){
-	        Object[][] T_data_2 = new Object[module2.get_companys().size()][7];
+	        Object[][] T_data_2 = new Object[module2.get_companys().size()][9];
 	        //System.out.println(module2.get_companys().size());
 	        for(int i = 0; i<module2.get_companys().size();i++){
 	        	T_data_2[i][0] = i;
 	        	T_data_2[i][1] = module2.get_companys().get(i);
 	        	T_data_2[i][2] = module2.get_modules().get(i);
-	        	T_data_2[i][3] = module2.get_file_names().get(i);
-	        	T_data_2[i][4] = module2.get_returns().get(i)+"%";
-	        	T_data_2[i][5] = module2.get_from_dates().get(i);
-	        	T_data_2[i][6] = module2.get_to_dates().get(i);
+	        	T_data_2[i][3] = module2.get_windows().get(i);
+	        	T_data_2[i][4] = module2.get_thresholds().get(i);
+	        	T_data_2[i][5] = module2.get_file_names().get(i);
+	        	T_data_2[i][6] = module2.get_returns().get(i)+"%";
+	        	T_data_2[i][7] = module2.get_from_dates().get(i);
+	        	T_data_2[i][8] = module2.get_to_dates().get(i);
 	        }
             JTable table_2 = new JTable(T_data_2 , columnTitle);
             DefaultTableCellRenderer render = new DefaultTableCellRenderer();
@@ -98,15 +102,17 @@ public class Overview extends JFrame{
 
         
         if(module3.get_companys().size() != 0){
-	        Object[][] T_data_3 = new Object[module3.get_companys().size()][7];
+	        Object[][] T_data_3 = new Object[module3.get_companys().size()][9];
 	        for(int i = 0; i<module3.get_companys().size();i++){
 	        	T_data_3[i][0] = i;
 	        	T_data_3[i][1] = module3.get_companys().get(i);
 	        	T_data_3[i][2] = module3.get_modules().get(i);
-	        	T_data_3[i][3] = module3.get_file_names().get(i);
-	        	T_data_3[i][4] = module3.get_returns().get(i)+"%";
-	        	T_data_3[i][5] = module3.get_from_dates().get(i);
-	        	T_data_3[i][6] = module3.get_to_dates().get(i);
+	        	T_data_3[i][3] = module3.get_windows().get(i);
+	        	T_data_3[i][4] = module3.get_thresholds().get(i);
+	        	T_data_3[i][5] = module3.get_file_names().get(i);
+	        	T_data_3[i][6] = module3.get_returns().get(i)+"%";
+	        	T_data_3[i][7] = module3.get_from_dates().get(i);
+	        	T_data_3[i][8] = module3.get_to_dates().get(i);
 	        }
             JTable table_3 = new JTable(T_data_3 , columnTitle);
             DefaultTableCellRenderer render = new DefaultTableCellRenderer();

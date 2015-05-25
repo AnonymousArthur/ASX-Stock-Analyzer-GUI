@@ -9,8 +9,15 @@ public class Record {
 	ArrayList<String> from_dates = new ArrayList<String>();
 	ArrayList<String> to_dates = new ArrayList<String>();
 	ArrayList<String> file_names = new ArrayList<String>();
-	
+	ArrayList<Integer> windows = new ArrayList<Integer>();
+	ArrayList<Double> thresholds = new ArrayList<Double>();
 	public Record(){
+	}
+	public ArrayList<Integer> get_windows(){
+		return windows;
+	}
+	public ArrayList<Double> get_thresholds(){
+		return thresholds;
 	}
 	
 	public ArrayList<String> get_companys(){
@@ -49,5 +56,11 @@ public class Record {
 	}
 	public void set_module(String module){
 		this.modules.add(module);
+	}
+	public void set_window(int w){
+		windows.add(w);
+	}
+	public void set_threshold(double t){
+		thresholds.add(t);
 	}
 }

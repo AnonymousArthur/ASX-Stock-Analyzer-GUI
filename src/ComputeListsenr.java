@@ -323,6 +323,9 @@ public class ComputeListsenr {
 						record.set_to_date(edate);
 						record.set_file_name(fileName);
 						record.set_module(module);
+						record.set_window(window);
+						record.set_threshold(threshold);
+						
 						
 						send = send + company + "|" + String.valueOf(totalReturn) + "|";
 						// profit graph
